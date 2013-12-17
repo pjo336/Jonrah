@@ -9,4 +9,5 @@
     <bean id="userDao" class="com.bt.user.dao.UserDaoImpl" />
     <bean id="userService" class="com.bt.user.service.UserServiceImpl" />
     <bean id="indexController" class="com.bt.index.controller.IndexController" />
+    <bean id="dBSession" class="com.bt.hibernate.DBSession" />
 </beans>
