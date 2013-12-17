@@ -5,9 +5,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties" />
+    <context:component-scan base-package="com.bt.*" />
 
-    <bean id="userDao" class="com.bt.user.dao.UserDaoImpl" />
-    <bean id="userService" class="com.bt.user.service.UserServiceImpl" />
-    <bean id="indexController" class="com.bt.index.controller.IndexController" />
-    <bean id="dBSession" class="com.bt.hibernate.DBSessionImpl" />
 </beans>

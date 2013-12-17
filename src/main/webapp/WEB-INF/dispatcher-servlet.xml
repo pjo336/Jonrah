@@ -15,7 +15,7 @@
     <mvc:annotation-driven />
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 
-	<context:component-scan base-package="com.bt" />
+	<context:component-scan base-package="com.bt.index.controller" />
 
     <bean id="jspViewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
