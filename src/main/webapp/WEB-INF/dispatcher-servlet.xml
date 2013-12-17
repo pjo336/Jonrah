@@ -1,63 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-	<context:property-placeholder location="classpath:jdbc.properties" />
+		 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <import resource="classpath:hibernate.cfg.xml"/>
+    <import resource="classpath:com.bt/applicationContext.xml"/>
+    <mvc:annotation-driven />
+    <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+
 	<context:component-scan base-package="com.bt" />
-	<tx:annotation-driven transaction-manager="hibernateTransactionManager" />
 
-	<bean id="jspViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/view/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" />
-		<property name="url" value="jdbc:mysql://localhost/biggertime" />
-        <property name="username" value="root" />
-        <property name="password" value="password" />
-	</bean>
-
-	 <!-- configure hibernate session factory -->
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.bt"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-            </props>
-        </property>
+    <bean id="jspViewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
     </bean>
-	
-	
-	<bean id="userDao" class="com.bt.user.dao.UserDaoImpl">
-	</bean>
-	
-	<bean id="userService"
-		class="com.bt.user.service.UserServiceImpl">
-	</bean>
 
-	<bean id="indexController" class="com.bt.index.controller.IndexController">
-	</bean>
-
-	<bean id="hibernateTransactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
 </beans>
