@@ -1,17 +1,22 @@
 package com.bt.user;
 
-import com.bt.user.UserGender;
-import com.bt.user.UserType;
+import com.bt.entity.EntityInterface;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements EntityInterface {
+
+    public User() {}
+
+    public User(String firstName, String lastName, UserGender gender, String email, UserType type) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setGender(gender);
+        this.setEmail(email);
+        this.setUserType(type);
+    }
     
     @Id
     @GeneratedValue
