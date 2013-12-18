@@ -22,12 +22,19 @@ public class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, 
 
     @Autowired
     private SessionFactory sessionFactory;
-    protected Class<? extends E> daoType;
+    protected Class<? extends E> daoType; // Class type
 
+    /**
+     * Set the class type being used as the entity
+     */
     public GenericDaoImpl() {
         daoType = (Class<E>)((ParameterizedType) (getClass().getGenericSuperclass())).getActualTypeArguments()[0];
     }
 
+    /**
+     * Get the current session
+     * @return
+     */
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();
     }

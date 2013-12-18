@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(long id) {
+    public User findUserById(long id) throws NotFoundException{
         return userDao.findUserById(id);
     }
 

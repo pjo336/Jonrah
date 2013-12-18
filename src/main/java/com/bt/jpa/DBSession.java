@@ -6,7 +6,13 @@ package com.bt.jpa;
  */
 public interface DBSession {
 
+    /**
+     * Allows the ability to start a transaction
+     */
     public void beginTransaction();
 
+    /**
+     * Allows the ability to abort a transaction without committing
+     */
     public void abortTransaction();
 }

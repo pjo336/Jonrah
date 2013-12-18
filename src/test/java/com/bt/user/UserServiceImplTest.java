@@ -1,6 +1,7 @@
 package com.bt.user;
 
 import com.bt.user.service.UserService;
+import javassist.NotFoundException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 /**
  * User: Peter Johnston
@@ -22,20 +23,21 @@ public class UserServiceImplTest {
     @Autowired
     UserService impl;
 
+    private String firstName = "first";
+    private String lastName = "last";
+    private String email = "email";
+
     @BeforeClass
     public static void setup() {
 
     }
 
     @Test
-    public void testAddAndDeleteUser() {
-        String firstName = "first";
-        String lastName = "last";
-        String email = "email";
+    public void testAddAndDeleteUser() throws NotFoundException {
 
         // Get the original amount of Users in the database
         int size = impl.getAllUsers().size();
-        User user = new User(firstName, lastName, UserGender.MALE, email, UserType.GENERIC);
+        User user = createUser();
         // Add the new user
         impl.addUser(user);
         // Check the amount of Users now includes our added User
@@ -57,5 +59,26 @@ public class UserServiceImplTest {
         impl.removeUser(user);
         // And make sure the amount of users has returned back to where it started
         assertEquals(size, impl.getAllUsers().size());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void testRemoveNFE() throws NotFoundException{
+        try {
+            impl.removeUserById(-1);
+        } catch(NotFoundException nfe) {
+            if(!nfe.getLocalizedMessage().equals("A user with this id does not exist")) {
+                fail();
+            } else {
+                throw new NotFoundException("Not Found Exception");
+            }
+        }
+    }
+
+    /**
+     * Creates a user for testing
+     * @return
+     */
+    private User createUser() {
+        return new User(firstName, lastName, UserGender.MALE, email, UserType.GENERIC);
     }
 }
