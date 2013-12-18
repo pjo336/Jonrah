@@ -1,4 +1,4 @@
-package com.bt.hibernate;
+package com.bt.jpa;
 
 /**
  * User: Peter Johnston

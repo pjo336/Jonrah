@@ -5,7 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties" />
-    <context:component-scan base-package="com.bt.*" />
+
+    <context:component-scan base-package="com.bt.entity"/>
+    <context:component-scan base-package="com.bt.servlet"/>
+    <context:component-scan base-package="com.bt.user"/>
 
     <import resource="classpath:com/bt/applicationContext-jpa.xml"/>
 
