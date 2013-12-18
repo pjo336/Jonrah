@@ -1,4 +1,4 @@
-package com.bt.index.controller;
+package com.bt.web.index.controller;
 
 import com.bt.user.User;
 import com.bt.user.UserGender;
