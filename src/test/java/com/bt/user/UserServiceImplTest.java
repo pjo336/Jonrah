@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * Date: 12/16/13
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/com.bt/applicationContext.xml" , "classpath:com.bt/applicationContext-jpa.xml"})
+@ContextConfiguration(locations = {"classpath:/com/bt/applicationContext.xml" , "classpath:com/bt/applicationContext-jpa.xml"})
 public class UserServiceImplTest {
 
     @Autowired
