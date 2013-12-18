@@ -9,3 +9,6 @@
 *.iml
 .idea
 /target/
+
+# Eclipse project files #
+.settings
