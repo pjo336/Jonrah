@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 
 @Component
-@ContextConfiguration(locations = {"classpath:/com.bt/applicationContext.xml" , "classpath:hibernate.cfg.xml"})
+@ContextConfiguration(locations = {"classpath:/com.bt/applicationContext.xml" , "classpath:com.bt/applicationContext-jpa.xml"})
 public class DBSessionImpl implements DBSession {
 
 
