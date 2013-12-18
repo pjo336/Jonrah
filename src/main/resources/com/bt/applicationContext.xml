@@ -7,7 +7,6 @@
     <context:property-placeholder location="classpath:jdbc.properties" />
 
     <context:component-scan base-package="com.bt.entity"/>
-    <context:component-scan base-package="com.bt.servlet"/>
     <context:component-scan base-package="com.bt.user"/>
 
     <import resource="classpath:com/bt/applicationContext-jpa.xml"/>
