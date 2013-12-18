@@ -57,7 +57,7 @@ public class IndexController {
     public ModelAndView deleteUserDataPost(@ModelAttribute("user") User user,
                                      BindingResult result) {
         try {
-            userService.deleteUserById(user.getId());
+            userService.removeUserById(user.getId());
         } catch (NotFoundException nfe) {
             System.out.println(nfe.getLocalizedMessage());
         }
@@ -67,7 +67,7 @@ public class IndexController {
    @RequestMapping("/userList")
    public ModelAndView getUserList() {
 	   Map<String, Object> model = new HashMap<String, Object>();
-	   List<User> users = userService.getUsers();
+	   List<User> users = userService.getAllUsers();
 	   model.put("user", users);
 	   return new ModelAndView("user-details", model);
    }

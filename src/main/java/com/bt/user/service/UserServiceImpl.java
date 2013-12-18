@@ -3,6 +3,8 @@ package com.bt.user.service;
 import com.bt.user.User;
 import com.bt.user.dao.UserDao;
 import javassist.NotFoundException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,32 +18,43 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public void addUser(User user) {
-        userDao.saveUser(user);
+        userDao.add(user);
     }
 
     @Override
-    public List<User> getUsers() {
-        return userDao.getUsers();
+    public void updateUser(User user) {
+        userDao.update(user);
     }
 
     @Override
-    public User findUserById(int id) {
+    public void removeUser(User user) {
+        userDao.remove(user);
+    }
+
+    @Override
+    public User findUserById(long id) {
         return userDao.findUserById(id);
     }
 
     @Override
-    public void deleteUser(User user) {
-        userDao.deleteUser(user);
+    public List<User> getAllUsers() {
+        return userDao.list();
     }
 
     @Override
-    public void deleteUserById(int id) throws NotFoundException {
+    public void removeUserById(long id) throws NotFoundException {
         User user = findUserById(id);
         if(user != null) {
-            userDao.deleteUser(user);
+            userDao.remove(user);
         } else {
             throw new NotFoundException("A user with this id does not exist");
         }
