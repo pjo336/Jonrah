@@ -38,5 +38,10 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
+    <!-- configure jdbcTemplate to perform sql queries -->
+    <bean id="jdbcTemplate"
+          class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
+    </bean>
 
 </beans>
