@@ -8,7 +8,7 @@
 
 	<servlet-mapping>
 		<servlet-name>biggertime</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
     <context-param>
