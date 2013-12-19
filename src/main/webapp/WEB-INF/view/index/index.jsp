@@ -1,7 +1,8 @@
 <html>
 <head>
 <title>Jonrah</title>
-<link rel="stylesheet" type="text/css" href="/static/styles/style.css" >
+<link rel="stylesheet/less" type="text/css" href="/static/styles/style.less" >
+<script src="/static/js/less.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="index">
