@@ -1,5 +1,4 @@
-BiggerTime
+Jonrah
 ==========
 
-bigGER
-...time
+// Dont forget to add fancy read me stuff before putting on github

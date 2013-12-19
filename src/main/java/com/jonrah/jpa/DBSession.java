@@ -1,4 +1,4 @@
-package com.bt.jpa;
+package com.jonrah.jpa;
 
 /**
  * User: Peter Johnston

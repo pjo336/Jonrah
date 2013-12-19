@@ -1,5 +1,7 @@
 @CHARSET "ISO-8859-1";
 
-.index a { font-size:45px;}
-
-.index h2 { font-size: 100px;}
+.index a:link { font-size:45px; color: teal; text-align: center; text-decoration: none;}
+.index a:hover { font-size:45px; color: teal; text-align: center; border-bottom: 1px teal;}
+.index h2 { font-size: 100px; color: teal; text-align: center;}
+.index ul {list-style: none;}
+.index li {text-align: center;}

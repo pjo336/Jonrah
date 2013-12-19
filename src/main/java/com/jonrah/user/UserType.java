@@ -1,4 +1,4 @@
-package com.bt.user;
+package com.jonrah.user;
 
 public enum UserType {
 

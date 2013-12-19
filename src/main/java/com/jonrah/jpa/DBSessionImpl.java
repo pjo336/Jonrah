@@ -1,4 +1,4 @@
-package com.bt.jpa;
+package com.jonrah.jpa;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 
 @Component
-@ContextConfiguration(locations = {"classpath:/com/bt/applicationContext.xml", "classpath:com/bt/applicationContext-jpa.xml"})
+@ContextConfiguration(locations = {"classpath:/com/jonrah/applicationContext.xml", "classpath:com/jonrah/applicationContext-jpa.xml"})
 public class DBSessionImpl implements DBSession {
 
 

@@ -1,7 +1,7 @@
-package com.bt.user.dao;
+package com.jonrah.user.dao;
 
-import com.bt.genericdao.GenericDao;
-import com.bt.user.User;
+import com.jonrah.genericdao.GenericDao;
+import com.jonrah.user.User;
 
 public interface UserDao extends GenericDao<User, Long> {
 

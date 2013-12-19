@@ -1,7 +1,7 @@
-package com.bt.user.service;
+package com.jonrah.user.service;
 
-import com.bt.user.User;
-import com.bt.user.dao.UserDao;
+import com.jonrah.user.User;
+import com.jonrah.user.dao.UserDao;
 import javassist.NotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

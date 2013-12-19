@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BiggerTime | User Details</title>
+<title>Jonrah | User Details</title>
 </head>
 <body>
 	<center>
-		<div style="color: teal; font-size: 30px">BiggerTime | User
+		<div style="color: teal; font-size: 30px">Jonrah | User
 			Details</div>
 		<c:if test="${!empty user}">
 			<table border="1" bgcolor="black" width="700px">

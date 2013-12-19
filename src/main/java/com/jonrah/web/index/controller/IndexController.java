@@ -1,9 +1,9 @@
-package com.bt.web.index.controller;
+package com.jonrah.web.index.controller;
 
-import com.bt.user.User;
-import com.bt.user.UserGender;
-import com.bt.user.UserType;
-import com.bt.user.service.UserService;
+import com.jonrah.user.User;
+import com.jonrah.user.UserGender;
+import com.jonrah.user.UserType;
+import com.jonrah.user.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

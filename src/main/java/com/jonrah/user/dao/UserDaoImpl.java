@@ -1,7 +1,7 @@
-package com.bt.user.dao;
+package com.jonrah.user.dao;
 
-import com.bt.genericdao.GenericDaoImpl;
-import com.bt.user.User;
+import com.jonrah.genericdao.GenericDaoImpl;
+import com.jonrah.user.User;
 import org.springframework.stereotype.Component;
 
 @Component

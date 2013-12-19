@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BiggerTime | Registration Form</title>
+<title>Jonrah | Registration Form</title>
 </head>
 <body>
 	<center>
 
-		<div style="color: teal; font-size: 30px">BiggerTime |
+		<div style="color: teal; font-size: 30px">Jonrah |
 			Registration Form</div>
 
 		<c:url var="userRegistration" value="saveUser.html" />

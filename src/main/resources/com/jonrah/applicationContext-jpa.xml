@@ -9,7 +9,7 @@
 
     <tx:annotation-driven transaction-manager="hibernateTransactionManager" />
 
-    <context:component-scan base-package="com.bt.jpa"/>
+    <context:component-scan base-package="com.jonrah.jpa"/>
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -23,7 +23,7 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.bt"/>
+        <property name="packagesToScan" value="com.jonrah"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="dialect">${hibernate.dialect}</prop>

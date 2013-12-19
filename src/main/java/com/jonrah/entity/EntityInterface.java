@@ -1,4 +1,4 @@
-package com.bt.entity;
+package com.jonrah.entity;
 
 /**
  * User: Peter Johnston

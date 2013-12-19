@@ -1,4 +1,4 @@
-package com.bt.genericdao;
+package com.jonrah.genericdao;
 
 import java.util.List;
 

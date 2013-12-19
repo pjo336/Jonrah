@@ -1,6 +1,6 @@
-package com.bt.user;
+package com.jonrah.user;
 
-import com.bt.user.service.UserService;
+import com.jonrah.user.service.UserService;
 import javassist.NotFoundException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
  * Date: 12/16/13
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/com/bt/applicationContext.xml" , "classpath:com/bt/applicationContext-jpa.xml"})
+@ContextConfiguration(locations = {"classpath:/com/jonrah/applicationContext.xml" , "classpath:com/jonrah/applicationContext-jpa.xml"})
 public class UserServiceImplTest {
 
     @Autowired

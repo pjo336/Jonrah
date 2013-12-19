@@ -1,6 +1,6 @@
-package com.bt.user.service;
+package com.jonrah.user.service;
 
-import com.bt.user.User;
+import com.jonrah.user.User;
 import javassist.NotFoundException;
 
 import java.util.List;

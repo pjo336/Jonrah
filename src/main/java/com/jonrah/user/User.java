@@ -1,6 +1,6 @@
-package com.bt.user;
+package com.jonrah.user;
 
-import com.bt.entity.EntityInterface;
+import com.jonrah.entity.EntityInterface;
 
 import javax.persistence.*;
 
