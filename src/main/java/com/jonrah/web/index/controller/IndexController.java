@@ -20,42 +20,39 @@ import java.util.Map;
 
 @Controller
 public class IndexController {
-	
-   @Autowired
-   private UserService userService;
 
-   @RequestMapping("/register")
-   public ModelAndView getRegisterForm(@ModelAttribute("user") User user,
-		BindingResult result) {
+    @Autowired
+    private UserService userService;
 
-	   List<UserGender> gender = new ArrayList<UserGender>();
-	   for (UserGender genderName : UserGender.values()) {
-	       gender.add(genderName);
-	   }
-	   
-	   List<UserType> userType = new ArrayList<UserType>();
-       for (UserType userTypeName : UserType.values()) {
-           userType.add(userTypeName);
-       }
+    @RequestMapping("/register")
+    public ModelAndView getRegisterForm(@ModelAttribute("user") User user, BindingResult result) {
 
-	   Map<String, Object> model = new HashMap<String, Object>();
-	   model.put("gender", gender);
-	   model.put("userType", userType);
+        List<UserGender> gender = new ArrayList<UserGender>();
+        for (UserGender genderName : UserGender.values()) {
+            gender.add(genderName);
+        }
 
-	   return new ModelAndView("register", "model", model);
-   }
+        List<UserType> userType = new ArrayList<UserType>();
+        for (UserType userTypeName : UserType.values()) {
+            userType.add(userTypeName);
+        }
+
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("gender", gender);
+        model.put("userType", userType);
+
+        return new ModelAndView("register", "model", model);
+    }
 
 
-   @RequestMapping("/saveUser")
-   public ModelAndView saveUserData(@ModelAttribute("user") User user,
-		   BindingResult result) {
-	   userService.addUser(user);
-	   return new ModelAndView("redirect:/userList.html");
-   }
+    @RequestMapping("/saveUser")
+    public ModelAndView saveUserData(@ModelAttribute("user") User user, BindingResult result) {
+        userService.addUser(user);
+        return new ModelAndView("redirect:/userList.html");
+    }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public ModelAndView deleteUserDataPost(@ModelAttribute("user") User user,
-                                     BindingResult result) {
+    public ModelAndView deleteUserDataPost(@ModelAttribute("user") User user, BindingResult result) {
         try {
             userService.removeUserById(user.getId());
         } catch (NotFoundException nfe) {
@@ -64,18 +61,24 @@ public class IndexController {
         return new ModelAndView("redirect:/userList.html");
     }
 
-   @RequestMapping("/userList")
-   public ModelAndView getUserList() {
-	   Map<String, Object> model = new HashMap<String, Object>();
-	   List<User> users = userService.getAllUsers();
-	   model.put("user", users);
-	   return new ModelAndView("user-details", model);
-   }
-   
-   @RequestMapping("/admin")
-   public ModelAndView loadAdminPage() {
-       Map<String, Object> model =  new HashMap<String, Object>();
-       System.out.println("moo");
-       return new ModelAndView("admin-page", "model", model);
-   }
+    @RequestMapping("/userList")
+    public ModelAndView getUserList() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<User> users = userService.getAllUsers();
+        model.put("user", users);
+        return new ModelAndView("user-details", model);
+    }
+
+    @RequestMapping("/admin")
+    public ModelAndView loadAdminPage() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        System.out.println("moo");
+        return new ModelAndView("admin-page", "model", model);
+    }
+
+    @RequestMapping("/bootstrap-test")
+    public ModelAndView loadTest() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        return new ModelAndView("bootstrap-test", "model", model);
+    }
 }
