@@ -24,6 +24,11 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/index")
+    public ModelAndView getIndex() {
+        return new ModelAndView("/index/index", "model", new HashMap<String, Object>());
+    }
+
     @RequestMapping("/register")
     public ModelAndView getRegisterForm(@ModelAttribute("user") User user, BindingResult result) {
 

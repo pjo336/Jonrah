@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Admin Control</title>
+    <title>Admin Control</title>
+    <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
 BEAR

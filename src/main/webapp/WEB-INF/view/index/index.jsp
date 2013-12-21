@@ -1,17 +1,31 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Jonrah</title>
-<link rel="stylesheet/less" type="text/css" href="/static/styles/style.less" >
-<script src="/static/js/less.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <title>Jonrah</title>
+    <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
-    <div class="index">
-	<h2>JONRAH</h2>
-	<ul>
-	    <li><a href="/register.html">Register</a></li>
-	    <li><a href="/admin.html">Admin Access</a></li>
-        <li><a href="/userList.html">User List</a></li>
-	</ul>
-	</div>
+<div class="container">
+
+    <div class="panel-body">
+        <div class="jumbotron">
+            <div class="index">
+                <h2>JONRAH</h2>
+
+                <p style="text-align: center; color: teal;">Blah blah there is nothing interesting to say about this app
+                    cuz it doesnt do anything</p>
+                <br/>
+
+                <p style="text-align: center; color: teal;"><a class="btn btn-primary btn-lg" role="button">Get
+                    Started</a></p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
