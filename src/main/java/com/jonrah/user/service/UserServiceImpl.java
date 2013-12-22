@@ -1,6 +1,7 @@
 package com.jonrah.user.service;
 
 import com.jonrah.user.User;
+import com.jonrah.user.UserType;
 import com.jonrah.user.dao.UserDao;
 import javassist.NotFoundException;
 import org.hibernate.Session;
@@ -18,15 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
 
     @Override
     public void addUser(User user) {
+        if(user.getUserType()==null) {
+            user.setUserType(UserType.GENERIC);
+        }
         userDao.add(user);
     }
 
@@ -43,6 +41,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(long id) throws NotFoundException{
         return userDao.findUserById(id);
+    }
+
+    public List<User> findUserByLogin(String login) {
+        return userDao.findByStringQuery(login);
     }
 
     @Override

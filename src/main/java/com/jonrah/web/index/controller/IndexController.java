@@ -37,20 +37,15 @@ public class IndexController {
             gender.add(genderName);
         }
 
-        List<UserType> userType = new ArrayList<UserType>();
-        for (UserType userTypeName : UserType.values()) {
-            userType.add(userTypeName);
-        }
-
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("gender", gender);
-        model.put("userType", userType);
 
         return new ModelAndView("register", "model", model);
     }
 
     @RequestMapping("/saveUser")
     public ModelAndView saveUserData(@ModelAttribute("user") User user, BindingResult result) {
+        System.out.println(user);
         userService.addUser(user);
         return new ModelAndView("redirect:/userList.html");
     }

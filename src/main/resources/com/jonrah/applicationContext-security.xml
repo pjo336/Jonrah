@@ -6,19 +6,19 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/admin*" access="ROLE_USER" />
-        <intercept-url pattern="/userList*" access="ROLE_USER" />
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/userList*" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login" default-target-url="/index"
                     authentication-failure-url="/loginfailed" />
         <logout logout-success-url="/logout" />
     </http>
 
+    <beans:bean id="customUserDetailsService" class="com.jonrah.security.UserDetailsServiceImpl"></beans:bean>
+
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="password" authorities="ROLE_USER" />
-            </user-service>
+        <authentication-provider
+                user-service-ref="customUserDetailsService">
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

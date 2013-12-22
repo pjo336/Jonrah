@@ -10,7 +10,23 @@ public class User implements EntityInterface {
 
     public User() {}
 
-    public User(String firstName, String lastName, UserGender gender, String email, UserType type) {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
+    }
+
+    public User(String userName, String password, String firstName, String lastName, UserGender gender, String email, UserType type) {
+        this.setUserName(userName);
+        this.setPassword(password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setGender(gender);
@@ -22,6 +38,12 @@ public class User implements EntityInterface {
     @GeneratedValue
     @Column(name = "id")
     private long id;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "password")
+    private String password;
     
     @Column(name = "first_name")
     private String firstName;
@@ -36,7 +58,7 @@ public class User implements EntityInterface {
     private String email;
     
     @Column(name = "user_type")
-    private int userType;
+    private String userType;
     
     public long getId() {
         return id;
@@ -44,6 +66,22 @@ public class User implements EntityInterface {
    
     public void setId(long id) {
             this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

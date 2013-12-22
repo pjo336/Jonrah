@@ -19,8 +19,16 @@
 		<form:form id="registerForm" class="form-signin" modelAttribute="user" method="post"
 			action="${userRegistration}">
 
-			<table width="500px" height="200px">
-				<tr>
+			<table width="600px" height="350px">
+                <tr>
+                    <td><form:label path="userName">User Name</form:label></td>
+                    <td><form:input path="userName" /></td>
+                </tr>
+                <tr>
+                    <td><form:label path="password">Password</form:label></td>
+                    <td><form:input path="password" /></td>
+                </tr>
+                <tr>
 					<td><form:label path="firstName">First Name</form:label></td>
 					<td><form:input path="firstName" /></td>
 				</tr>
@@ -35,10 +43,6 @@
 				<tr>
                     <td><form:label path="email">Email Address</form:label></td>
                     <td><form:input path="email" /></td>
-                </tr>
-                <tr>
-                    <td><form:label path="userType">User Type</form:label></td>
-                    <td><form:select path="userType" items="${model.userType}" /></td>
                 </tr>
 				<tr>
 					<td></td>

@@ -23,6 +23,8 @@ public class UserServiceImplTest {
     @Autowired
     UserService impl;
 
+    private String userName = "user";
+    private String password = "password";
     private String firstName = "first";
     private String lastName = "last";
     private String email = "email";
@@ -79,6 +81,6 @@ public class UserServiceImplTest {
      * @return
      */
     private User createUser() {
-        return new User(firstName, lastName, UserGender.MALE, email, UserType.GENERIC);
+        return new User(userName, password, firstName, lastName, UserGender.MALE, email, UserType.GENERIC);
     }
 }

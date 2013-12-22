@@ -38,4 +38,11 @@ public interface GenericDao<E, K> {
      * @return
      */
     List<E> list();
+
+    /**
+     * Find a list of entities based on the given String parameter
+     * @param str
+     * @return
+     */
+    List<E> findByStringQuery(String str);
 }

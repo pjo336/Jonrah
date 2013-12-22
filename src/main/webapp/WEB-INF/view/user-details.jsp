@@ -18,7 +18,7 @@
 				<tr
 					style="background-color: teal; color: white; text-align: center;"
 					height="40px">
-					<td>User Id</td>
+					<td>Username</td>
 					<td>First Name</td>
 					<td>Last Name</td>
 					<td>Gender</td>
@@ -32,7 +32,7 @@
 					<tr
 						style="background-color: white; color: black; text-align: center;"
 						height="30px">
-						<td><c:out value="${user.id}" /></td>
+						<td><c:out value="${user.userName}" /></td>
 						<td><c:out value="${user.firstName}" /></td>
 						<td><c:out value="${user.lastName}" /></td>
 						<td><c:out value="${user.gender}" /></td>

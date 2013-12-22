@@ -1,5 +1,6 @@
 package com.jonrah.genericdao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,10 @@ public class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, 
     @Override
     public List<E> list() {
         return currentSession().createCriteria(daoType).list();
+    }
+
+    @Override
+    public List<E> findByStringQuery(String str) {
+        return currentSession().createCriteria(daoType, str).list();
     }
 }

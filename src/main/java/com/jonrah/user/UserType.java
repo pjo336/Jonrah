@@ -2,24 +2,24 @@ package com.jonrah.user;
 
 public enum UserType {
 
-    ADMIN(0),
-    SUPERUSER(1),
-    FULL_ACCESS(2),
-    GENERIC(3);
+    ADMIN("0"),
+    SUPERUSER("1"),
+    FULL_ACCESS("2"),
+    GENERIC("3");
     
-    public int userTypeValue;
+    public String userTypeValue;
     
-    private UserType(int type) {
+    private UserType(String type) {
         this.userTypeValue = type;
     }
     
-    public int value() {
-        return ordinal();
+    public String value() {
+        return String.valueOf(ordinal());
     }
     
-    public static UserType getUserType(int userInt) {
+    public static UserType getUserType(String userTypeString) {
         for (UserType type : UserType.values()) {
-            if(type.value() == userInt) {
+            if(type.value().equals(userTypeString)) {
                 return type;
             }
         }

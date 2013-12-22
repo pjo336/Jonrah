@@ -33,6 +33,13 @@ public interface UserService {
     public User findUserById(long id) throws NotFoundException;
 
     /**
+     * Find the user with the given login
+     * Note that this returns a list, but since login is unique its size should either be 1 or 0
+     * @param login
+     * @return
+     */
+    public List<User> findUserByLogin(String login);
+    /**
      * Return all users in the database
      * @return
      */
