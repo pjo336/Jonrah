@@ -24,9 +24,9 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/index")
-    public ModelAndView getIndex() {
-        return new ModelAndView("/index/index", "model", new HashMap<String, Object>());
+    @RequestMapping("/")
+    public String getIndex() {
+        return "index/index";
     }
 
     @RequestMapping("/register")
@@ -48,7 +48,6 @@ public class IndexController {
 
         return new ModelAndView("register", "model", model);
     }
-
 
     @RequestMapping("/saveUser")
     public ModelAndView saveUserData(@ModelAttribute("user") User user, BindingResult result) {
@@ -77,7 +76,6 @@ public class IndexController {
     @RequestMapping("/admin")
     public ModelAndView loadAdminPage() {
         Map<String, Object> model = new HashMap<String, Object>();
-        System.out.println("moo");
         return new ModelAndView("admin-page", "model", model);
     }
 

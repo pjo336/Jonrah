@@ -10,14 +10,15 @@
     <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
-	<center>
+    <div class="container">
 
-		<div style="color: teal; font-size: 30px">Jonrah |
-			Registration Form</div>
+        <div style="color: teal; font-size: 30px">Jonrah |
+            Registration Form</div>
 
 		<c:url var="userRegistration" value="saveUser.html" />
-		<form:form id="registerForm" modelAttribute="user" method="post"
+		<form:form id="registerForm" class="form-signin" modelAttribute="user" method="post"
 			action="${userRegistration}">
+
 			<table width="500px" height="200px">
 				<tr>
 					<td><form:label path="firstName">First Name</form:label></td>
@@ -46,8 +47,6 @@
 			</table>
 		</form:form>
 
-
-		<a href="userList.html">Click Here to see User List</a>
-	</center>
+    </div>
 </body>
 </html>
