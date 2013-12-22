@@ -5,10 +5,11 @@
 <head>
     <meta charset="utf-8">
     <title>Jonrah</title>
-    <c:import url="/WEB-INF/view/parts/header.jsp"/>
+    <c:import url="/WEB-INF/view/parts/common-imports.jsp"/>
 </head>
 <body>
-<div class="container">
+<c:import url="/WEB-INF/view/parts/header.jsp"/>
+<div class="container" role="main">
 
     <div class="panel-body">
         <div class="jumbotron">

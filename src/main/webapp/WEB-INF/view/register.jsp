@@ -7,9 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Jonrah | Registration Form</title>
-    <c:import url="/WEB-INF/view/parts/header.jsp"/>
+    <c:import url="/WEB-INF/view/parts/common-imports.jsp"/>
 </head>
 <body>
+<c:import url="/WEB-INF/view/parts/header.jsp"/>
 	<center>
 
 		<div style="color: teal; font-size: 30px">Jonrah |
