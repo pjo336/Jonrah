@@ -10,6 +10,7 @@
     <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
+<c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
     <div class="container">
 
         <div style="color: teal; font-size: 30px">Jonrah |
@@ -52,5 +53,6 @@
 		</form:form>
 
     </div>
+    <c:import url="/WEB-INF/view/parts/footer.jsp"/>
 </body>
 </html>

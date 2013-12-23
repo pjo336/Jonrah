@@ -10,6 +10,7 @@
     <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
+<c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
 	<center>
 		<div style="color: teal; font-size: 30px">Jonrah | User
 			Details</div>
@@ -54,5 +55,6 @@
 		</c:if>
 		<a href="register.html">Click Here to add new User</a>
 	</center>
+    <c:import url="/WEB-INF/view/parts/footer.jsp"/>
 </body>
 </html>

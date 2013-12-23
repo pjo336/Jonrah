@@ -1,14 +1,33 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Admin Control</title>
+    <meta charset="utf-8">
+    <title>Jonrah</title>
     <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
 <body>
-BEAR
+<c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
+<div class="container">
+
+    <div class="panel-body">
+        <div class="jumbotron">
+            <div class="index">
+                <h2>JONRAH</h2>
+
+                <p style="text-align: center; color: teal;">Blah blah there is nothing interesting to say about this app
+                    cuz it doesnt do anything</p>
+                <br/>
+
+                <p style="text-align: center; color: teal;"><a class="btn btn-primary btn-lg" role="button">Get
+                    Started</a></p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<c:import url="/WEB-INF/view/parts/footer.jsp"/>
 </body>
 </html>

@@ -22,6 +22,7 @@
 
 </head>
 <body onload='document.f.j_username.focus();'>
+<c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
 <div class="container">
 
 <c:if test="${not empty error}">
@@ -58,5 +59,6 @@
 </form>
 
 </div>
+<c:import url="/WEB-INF/view/parts/footer.jsp"/>
 </body>
 </html>
