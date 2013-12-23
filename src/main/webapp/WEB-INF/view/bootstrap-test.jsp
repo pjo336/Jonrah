@@ -4,9 +4,10 @@
 <html>
 <head>
     <title>Jonrah | Bootstrap Test</title>
-    <c:import url="parts/header.jsp"/>
+    <c:import url="parts/common-imports.jsp"/>
 </head>
 <body>
+<c:import url="parts/header.jsp"/>
 <div class="container">
 
     <div class="masthead">
