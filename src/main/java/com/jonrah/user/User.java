@@ -3,26 +3,14 @@ package com.jonrah.user;
 import com.jonrah.entity.EntityInterface;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "JONRAH_USER")
 public class User implements EntityInterface {
 
     public User() {}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", userType='" + userType + '\'' +
-                '}';
-    }
 
     public User(String userName, String password, String firstName, String lastName, UserGender gender, String email, UserType type) {
         this.setUserName(userName);
@@ -33,7 +21,7 @@ public class User implements EntityInterface {
         this.setEmail(email);
         this.setUserType(type);
     }
-    
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -44,26 +32,34 @@ public class User implements EntityInterface {
 
     @Column(name = "password")
     private String password;
-    
+
     @Column(name = "first_name")
     private String firstName;
-    
+
     @Column(name = "last_name")
     private String lastName;
-    
+
     @Column(name = "gender")
     private int gender;
 
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "user_type")
     private String userType;
-    
+
+    @Column(name = "date_added")
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dateAdded;
+
+    @Column(name = "date_modified")
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dateModified;
+
     public long getId() {
         return id;
     }
-   
+
     public void setId(long id) {
             this.id = id;
     }
@@ -87,7 +83,7 @@ public class User implements EntityInterface {
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -107,20 +103,50 @@ public class User implements EntityInterface {
     public void setGender(UserGender gender) {
         this.gender = gender.value();
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public UserType getUserType() {
         return UserType.getUserType(userType);
     }
-    
+
     public void setUserType(UserType userType) {
         this.userType = userType.value();
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public Date getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(Date dateModified) {
+        this.dateModified = dateModified;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
     }
 }
