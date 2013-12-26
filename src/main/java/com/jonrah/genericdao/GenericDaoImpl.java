@@ -17,7 +17,6 @@ import java.util.List;
  * biggertime
  */
 
-@Repository
 @Transactional(propagation= Propagation.REQUIRED, readOnly=false)
 public class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, K> {
 
