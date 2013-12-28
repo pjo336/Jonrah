@@ -1,9 +1,12 @@
 package com.jonrah.user;
 
 import com.jonrah.entity.EntityInterface;
+import com.jonrah.trustt.comment.IssueComment;
+import com.jonrah.trustt.issue.Issue;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "JONRAH_USER")
@@ -55,6 +58,36 @@ public class User implements EntityInterface {
     @Column(name = "date_modified")
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateModified;
+
+    /**
+     * Created bugs
+     */
+    @OneToMany(mappedBy="createdById")
+    private Set<Issue> createdIssues;
+
+    /**
+     * Modified bugs
+     */
+    @OneToMany(mappedBy="lastModifiedById")
+    private Set<Issue> modifiedIssues;
+
+    /**
+     * Owned bugs
+     */
+    @OneToMany(mappedBy="ownerId")
+    private Set<Issue> ownedIssues;
+
+    /**
+     * Assigned bugs
+     */
+    @OneToMany(mappedBy="assignedToId")
+    private Set<Issue> assignedIssues;
+
+    /**
+     * Comments
+     */
+    @OneToMany(mappedBy="commenter")
+    private Set<IssueComment> comments;
 
     public long getId() {
         return id;

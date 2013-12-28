@@ -38,12 +38,12 @@ public class UserServiceImplTest {
     public void testAddAndDeleteUser() throws NotFoundException {
 
         // Get the original amount of Users in the database
-        int size = impl.getAllUsers().size();
+        int size = impl.findAllUsers().size();
         User user = createUser();
         // Add the new user
         impl.addUser(user);
         // Check the amount of Users now includes our added User
-        assertEquals(size + 1, impl.getAllUsers().size());
+        assertEquals(size + 1, impl.findAllUsers().size());
 
         long id = user.getId();
         String newFirstName = "blahblah";
@@ -53,14 +53,14 @@ public class UserServiceImplTest {
         impl.updateUser(user);
 
         // Retrieve the updated user
-        User updatedUser = impl.findUserById(id);
+        User updatedUser = impl.restoreUserById(id);
         // Make sure the change in first name is reflected
         assertEquals(newFirstName, updatedUser.getFirstName());
 
         // Finally remove the user to complete the test
         impl.removeUser(user);
         // And make sure the amount of users has returned back to where it started
-        assertEquals(size, impl.getAllUsers().size());
+        assertEquals(size, impl.findAllUsers().size());
     }
 
     @Test(expected = NotFoundException.class)

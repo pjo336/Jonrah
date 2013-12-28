@@ -4,8 +4,8 @@ import com.jonrah.user.User;
 import com.jonrah.user.UserType;
 import com.jonrah.user.dao.UserDao;
 import javassist.NotFoundException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,22 +39,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(long id) throws NotFoundException{
-        return userDao.findUserById(id);
+    public User restoreUserById(long id) throws NotFoundException{
+        return userDao.restoreUserById(id);
     }
 
+    // TODO using crit list
     public List<User> findUserByLogin(String login) {
-        return userDao.findByStringQuery(login);
+        Criteria crit = userDao.createCrit();
+        crit.add(Restrictions.like("userName", login));
+        return userDao.findCritList(crit);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> findAllUsers() {
         return userDao.list();
     }
 
     @Override
     public void removeUserById(long id) throws NotFoundException {
-        User user = findUserById(id);
+        User user = restoreUserById(id);
         if(user != null) {
             userDao.remove(user);
         } else {

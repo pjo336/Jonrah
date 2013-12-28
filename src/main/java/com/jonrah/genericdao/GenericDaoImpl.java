@@ -1,10 +1,9 @@
 package com.jonrah.genericdao;
 
-import org.hibernate.Criteria;
+import javassist.NotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,18 +53,14 @@ public class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, 
         currentSession().delete(entity);
     }
 
+    // TODO create our own exceptions?
     @Override
-    public E find(K key) {
+    public E restore(K key) throws NotFoundException{
         return (E) currentSession().get(daoType, key);
     }
 
     @Override
     public List<E> list() {
         return currentSession().createCriteria(daoType).list();
-    }
-
-    @Override
-    public List<E> findByStringQuery(String str) {
-        return currentSession().createCriteria(daoType, str).list();
     }
 }

@@ -2,6 +2,7 @@ package com.jonrah.security;
 
 import com.jonrah.user.User;
 import com.jonrah.user.dao.UserDao;
+import com.jonrah.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private UserDao userDAO;
 
+    @Autowired
+    private UserService userService;
+
     private User user;
 
     /**
@@ -39,12 +43,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public UserDetails loadUserByUsername(String login)
             throws UsernameNotFoundException {
         // Find the user
-        List<User> userList = userDAO.findUserByLogin(login);
+        List<User> userList = userService.findUserByLogin(login);
         // If the list is empty, throw an exception
         if(userList.size() == 0) {
             throw new UsernameNotFoundException("User was not found");
         } else {
-            user = userDAO.findUserByLogin(login).get(0);
+            user = userService.findUserByLogin(login).get(0);
         }
 
         // We have our user, so lets get his role and send him on to be authenticated

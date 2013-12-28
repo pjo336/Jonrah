@@ -8,6 +8,7 @@
 
     <context:component-scan base-package="com.jonrah.entity"/>
     <context:component-scan base-package="com.jonrah.user"/>
+    <context:component-scan base-package="com.jonrah.trustt"/>
 
     <import resource="classpath:com/jonrah/applicationContext-jpa.xml"/>
     <import resource="classpath:com/jonrah/applicationContext-security.xml"/>

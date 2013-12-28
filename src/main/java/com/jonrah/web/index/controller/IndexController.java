@@ -2,7 +2,6 @@ package com.jonrah.web.index.controller;
 
 import com.jonrah.user.User;
 import com.jonrah.user.UserGender;
-import com.jonrah.user.UserType;
 import com.jonrah.user.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +62,7 @@ public class IndexController {
     @RequestMapping("/userList")
     public ModelAndView getUserList() {
         Map<String, Object> model = new HashMap<String, Object>();
-        List<User> users = userService.getAllUsers();
+        List<User> users = userService.findAllUsers();
         model.put("user", users);
         return new ModelAndView("user-details", model);
     }

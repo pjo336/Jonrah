@@ -26,11 +26,12 @@ public interface UserService {
     public void removeUser(User user);
 
     /**
-     * Find the user with the given Id
+     * Restore the user with the given id. Throw NotFoundException if no user is found.
      * @param id
      * @return User
+     * @exception NotFoundException
      */
-    public User findUserById(long id) throws NotFoundException;
+    public User restoreUserById(long id) throws NotFoundException;
 
     /**
      * Find the user with the given login
@@ -43,7 +44,7 @@ public interface UserService {
      * Return all users in the database
      * @return
      */
-    public List<User> getAllUsers();
+    public List<User> findAllUsers();
 
     /**
      * Remove the user with the given Id

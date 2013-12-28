@@ -1,5 +1,7 @@
 package com.jonrah.genericdao;
 
+import javassist.NotFoundException;
+
 import java.util.List;
 
 /**
@@ -31,18 +33,11 @@ public interface GenericDao<E, K> {
      * @param key primary key of entity
      * @return
      */
-    E find(K key);
+    public E restore(K key) throws NotFoundException;
 
     /**
      * Return a list of all the entities in the database
      * @return
      */
     List<E> list();
-
-    /**
-     * Find a list of entities based on the given String parameter
-     * @param str
-     * @return
-     */
-    List<E> findByStringQuery(String str);
 }
