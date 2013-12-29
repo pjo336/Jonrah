@@ -15,6 +15,7 @@ import java.util.List;
  * Created by pjo336 on 12/28/13
  * biggertime
  */
+
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class IssueServiceImpl implements IssueService {
@@ -24,14 +25,14 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public List<Issue> findIssueByTitle(String title) {
-        Criteria crit = issueDao.createCrit();
+        Criteria crit = issueDao.createCrit(new Issue());
         crit.add(Restrictions.like("title", title + "%"));
         return issueDao.findCritList(crit);
     }
 
     @Override
     public List<Issue> findIssuesAssignedToUser(long userId) {
-        Criteria crit = issueDao.createCrit();
+        Criteria crit = issueDao.createCrit(new Issue());
         crit.add(Restrictions.eq("assignedToId.id", userId));
         return issueDao.findCritList(crit);
     }

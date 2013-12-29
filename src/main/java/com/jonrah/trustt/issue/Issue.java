@@ -1,5 +1,6 @@
 package com.jonrah.trustt.issue;
 
+import com.jonrah.entity.EntityInterface;
 import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.milestone.Milestone;
 import com.jonrah.trustt.type.IssueType;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "JONRAH_ISSUE")
-public class Issue {
+public class Issue implements EntityInterface {
 
     @Id
     @GeneratedValue
