@@ -1,7 +1,6 @@
 package com.jonrah.entity.dao;
 
 import com.jonrah.entity.EntityInterface;
-import javassist.NotFoundException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,8 +15,11 @@ import java.util.List;
  * Date: 12/28/13
  */
 
+/**
+ * Every concrete DAO must extend this class
+ */
 @Transactional(propagation= Propagation.REQUIRED, readOnly=false)
-public class EntityDaoImpl implements EntityDaoInterface {
+public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -51,12 +53,7 @@ public class EntityDaoImpl implements EntityDaoInterface {
     }
 
     @Override
-    public EntityInterface restoreById(long id) throws NotFoundException {
-        return (EntityInterface) currentSession().get(this.getClass(), id);
-    }
-
-    @Override
-    public List findCritList(Criteria crit) {
+    public List<E> findCritList(Criteria crit) {
         return crit.list();
     }
 }

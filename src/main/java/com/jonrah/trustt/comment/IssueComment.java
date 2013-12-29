@@ -1,5 +1,6 @@
 package com.jonrah.trustt.comment;
 
+import com.jonrah.entity.EntityInterface;
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.user.User;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "JONRAH_ISSUE_COMMENT")
-public class IssueComment {
+public class IssueComment implements EntityInterface {
 
     @Id
     @GeneratedValue

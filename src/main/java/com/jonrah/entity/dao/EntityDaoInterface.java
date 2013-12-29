@@ -1,7 +1,6 @@
 package com.jonrah.entity.dao;
 
 import com.jonrah.entity.EntityInterface;
-import javassist.NotFoundException;
 import org.hibernate.Criteria;
 
 import java.util.List;
@@ -10,7 +9,11 @@ import java.util.List;
  * User: Peter Johnston
  * Date: 12/28/13
  */
-public interface EntityDaoInterface {
+
+/**
+ * Every DAO Interface must extend this interface
+ */
+public interface EntityDaoInterface<E extends EntityInterface> {
 
     /**
      * Create and return a Criteria object. Can be used in the service layer to create custom criteria queries
@@ -37,16 +40,9 @@ public interface EntityDaoInterface {
     public void remove(EntityInterface entity);
 
     /**
-     * Return an entity with the matching id
-     * @param id
-     * @return EntityInterface
-     */
-    public EntityInterface restoreById(long id) throws NotFoundException;
-
-    /**
      * Find a list of Entities using the given Criteria
      * @param crit
      * @return
      */
-    public List findCritList(Criteria crit);
+    public List<E> findCritList(Criteria crit);
 }

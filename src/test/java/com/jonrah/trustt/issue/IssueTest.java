@@ -1,6 +1,5 @@
 package com.jonrah.trustt.issue;
 
-import com.jonrah.entity.EntityInterface;
 import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.milestone.Milestone;
@@ -91,13 +90,13 @@ public class IssueTest {
         System.out.println("ID : " + userId);
         List<Issue> list = issueService.findIssuesAssignedToUser(userId);
         System.out.println(list.size());
-        for(EntityInterface bug: list) {
-            System.out.println(bug);
+        for(Issue bug: list) {
+            System.out.println(bug.getTitle());
         }
 
         List<Issue> list2 = issueService.findIssueByTitle("Bug number 1");
-        for(EntityInterface bug: list2) {
-            System.out.println(bug);
+        for(Issue bug: list2) {
+            System.out.println(bug.getTitle());
         }
     }
 

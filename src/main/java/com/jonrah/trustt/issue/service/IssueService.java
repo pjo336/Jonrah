@@ -1,5 +1,7 @@
 package com.jonrah.trustt.issue.service;
 
+import com.jonrah.trustt.issue.Issue;
+
 import java.util.List;
 
 /**
@@ -14,12 +16,12 @@ public interface IssueService {
      * @param title
      * @return
      */
-    public List findIssueByTitle(String title);
+    public List<Issue> findIssueByTitle(String title);
 
     /**
      * Find all issues assigned to the user with the id given in the param
      * @param userId
      * @return
      */
-    public List findIssuesAssignedToUser(long userId);
+    public List<Issue> findIssuesAssignedToUser(long userId);
 }

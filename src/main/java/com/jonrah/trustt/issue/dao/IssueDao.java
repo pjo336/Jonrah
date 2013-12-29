@@ -9,9 +9,4 @@ import com.jonrah.entity.dao.EntityDaoInterface;
 
 public interface IssueDao extends EntityDaoInterface {
 
-    /**
-     * Return the current session fetched from GenericDao
-     * @return
-     */
-    //public Session getCurrentSession();
 }

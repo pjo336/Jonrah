@@ -1,5 +1,6 @@
 package com.jonrah.trustt.type;
 
+import com.jonrah.entity.EntityInterface;
 import com.jonrah.trustt.issue.Issue;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "JONRAH_ISSUE_TYPE")
-public class IssueType {
+public class IssueType implements EntityInterface {
 
     @Id
     @GeneratedValue
