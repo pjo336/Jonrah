@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name = "JONRAH_ISSUE_TYPE")
 public class IssueType implements EntityInterface {
 
+    public IssueType() {}
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -38,9 +40,6 @@ public class IssueType implements EntityInterface {
     @OneToMany(mappedBy="type")
     private Set<Issue> referencedIssueTypes;
 
-    public IssueType() {
-
-    }
 
     public long getId() {
         return id;
@@ -54,8 +53,8 @@ public class IssueType implements EntityInterface {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(IssueTypes name) {
+        this.name = name.getIssueTypeName();
     }
 
     public Date getDateAdded() {
@@ -81,12 +80,4 @@ public class IssueType implements EntityInterface {
     public void setReferencedIssueTypes(Set<Issue> referencedIssueTypes) {
         this.referencedIssueTypes = referencedIssueTypes;
     }
-
-//    public enum IssueTypes {
-//        Bug("0", "Bug");
-//
-//
-//
-//
-//    }
 }

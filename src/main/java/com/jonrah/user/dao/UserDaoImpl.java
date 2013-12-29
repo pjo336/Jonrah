@@ -1,29 +1,19 @@
 package com.jonrah.user.dao;
 
-import com.jonrah.genericdao.GenericDaoImpl;
+import com.jonrah.entity.dao.EntityDaoImpl;
 import com.jonrah.user.User;
-import javassist.NotFoundException;
-import org.hibernate.Criteria;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+/**
+ * Created by pjo336 on 12/19/13
+ * biggertime
+ */
 
 @Component
-public class UserDaoImpl extends GenericDaoImpl<User, Long> implements UserDao {
-
-
-    @Override
-    public Criteria createCrit() {
-        return super.currentSession().getSessionFactory().openSession().createCriteria(User.class);
-    }
+public class UserDaoImpl extends EntityDaoImpl implements UserDao {
 
     @Override
-    public User restoreUserById(long id) throws NotFoundException{
-        return super.restore(id);
-    }
-
-    @Override
-    public List<User> findCritList(Criteria crit) {
-        return crit.list();
+    public void updateOrCreateUser(User user) {
+        super.currentSession().saveOrUpdate(user);
     }
 }

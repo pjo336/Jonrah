@@ -1,6 +1,6 @@
 package com.jonrah.trustt.milestone.service;
 
-import com.jonrah.entity.EntityInterface;
+import com.jonrah.trustt.milestone.Milestone;
 
 import java.util.Date;
 import java.util.List;
@@ -18,14 +18,14 @@ public interface MilestoneService {
      * @param title
      * @return
      */
-    public List<? extends EntityInterface> findMilestoneByTitle(String title);
+    public List<Milestone> findMilestoneByTitle(String title);
 
     /**
      * Returns a list of all milestones due on the date given
      * @param date
      * @return
      */
-    public List<? extends EntityInterface> findMilestoneByDueDate(Date date);
+    public List<Milestone> findMilestoneByDueDate(Date date);
 
     /**
      * Returns a list of all milestones between the start date and end date
@@ -33,5 +33,5 @@ public interface MilestoneService {
      * @param endDate
      * @return
      */
-    public List<? extends EntityInterface> findMilestonesBetweenDates(Date startDate, Date endDate);
+    public List<Milestone> findMilestonesBetweenDates(Date startDate, Date endDate);
 }

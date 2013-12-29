@@ -22,44 +22,58 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        if(user.getUserType()==null) {
-            user.setUserType(UserType.GENERIC);
+        if(user != null) {
+            if(user.getUserType() == null) {
+                user.setUserType(UserType.GENERIC);
+            }
+            userDao.add(user);
         }
-        userDao.add(user);
     }
 
     @Override
     public void updateUser(User user) {
-        userDao.update(user);
+        if(user != null) {
+            userDao.updateOrCreateUser(user);
+        }
     }
 
     @Override
     public void removeUser(User user) {
-        userDao.remove(user);
+        if(user != null) {
+            userDao.remove(user);
+        }
     }
 
     @Override
-    public User restoreUserById(long id) throws NotFoundException{
-        return userDao.restoreUserById(id);
+    public User restoreUserById(long id) throws NotFoundException {
+        Criteria crit = userDao.createCrit(new User());
+        crit.add(Restrictions.eq("id", id));
+        List<User> userList = userDao.findCritList(crit);
+        if(userList.size() == 1 && userList.get(0) != null) {
+            return userList.get(0);
+        } else {
+            throw new NotFoundException("A user with this id does not exist");
+        }
     }
 
-    // TODO using crit list
+    @Override
     public List<User> findUserByLogin(String login) {
-        Criteria crit = userDao.createCrit();
+        Criteria crit = userDao.createCrit(new User());
         crit.add(Restrictions.like("userName", login));
         return userDao.findCritList(crit);
     }
 
     @Override
     public List<User> findAllUsers() {
-        return userDao.list();
+        Criteria crit = userDao.createCrit(new User());
+        return userDao.findCritList(crit);
     }
 
     @Override
     public void removeUserById(long id) throws NotFoundException {
-        User user = restoreUserById(id);
-        if(user != null) {
-            userDao.remove(user);
+        User userToRemove = restoreUserById(id);
+        if(userToRemove != null) {
+            userDao.remove(userToRemove);
         } else {
             throw new NotFoundException("A user with this id does not exist");
         }

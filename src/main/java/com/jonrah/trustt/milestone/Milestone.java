@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name = "JONRAH_MILESTONE")
 public class Milestone implements EntityInterface {
 
+    public Milestone(){}
+
     @Id
     @GeneratedValue
     @Column(name = "id")

@@ -14,7 +14,6 @@ public class User implements EntityInterface {
 
     public User() {}
 
-
     public User(String userName, String password, String firstName, String lastName, UserGender gender, String email, UserType type) {
         this.setUserName(userName);
         this.setPassword(password);
@@ -23,6 +22,15 @@ public class User implements EntityInterface {
         this.setGender(gender);
         this.setEmail(email);
         this.setUserType(type);
+    }
+
+    public User(String userName, String password, String firstName, String lastName, UserGender gender, String email) {
+        this.setUserName(userName);
+        this.setPassword(password);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setGender(gender);
+        this.setEmail(email);
     }
 
     @Id

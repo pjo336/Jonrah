@@ -8,38 +8,39 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * Add a user to the database
+     * Add a user to the database. If they have no userType set, it will default to GENERIC
      * @param user
      */
     public void addUser(User user);
 
     /**
-     * Update a user in the database
+     * If the user exists, update them to whatever is set in the user parameter, otherwise add the user to the database
      * @param user
      */
     public void updateUser(User user);
 
     /**
-     * Remove a user from the database
+     * If the user exists, remove them from the database. Otherwise, nothing happens
      * @param user
      */
     public void removeUser(User user);
 
     /**
-     * Restore the user with the given id. Throw NotFoundException if no user is found.
+     * Return the user with the given id. Throw a not found exception if no user is found
      * @param id
-     * @return User
+     * @return
      * @exception NotFoundException
      */
     public User restoreUserById(long id) throws NotFoundException;
 
     /**
-     * Find the user with the given login
-     * Note that this returns a list, but since login is unique its size should either be 1 or 0
+     * Returns a list of the users with the given login
+     * NOTE: since login is unique this should only return a list of size 1. We could change this to restore?
      * @param login
      * @return
      */
     public List<User> findUserByLogin(String login);
+
     /**
      * Return all users in the database
      * @return

@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by pjo336 on 12/17/13
  * biggertime
  */
-
+@Component
 @Transactional(propagation= Propagation.REQUIRED, readOnly=false)
 public class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, K> {
 

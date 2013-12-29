@@ -1,6 +1,5 @@
 package com.jonrah.trustt.milestone.service;
 
-import com.jonrah.entity.EntityInterface;
 import com.jonrah.trustt.milestone.Milestone;
 import com.jonrah.trustt.milestone.dao.MilestoneDao;
 import org.hibernate.Criteria;
@@ -26,14 +25,14 @@ public class MilestoneServiceImpl implements MilestoneService {
     MilestoneDao milestoneDao;
 
     @Override
-    public List<? extends EntityInterface> findMilestoneByTitle(String title) {
+    public List<Milestone> findMilestoneByTitle(String title) {
         Criteria crit = milestoneDao.createCrit(new Milestone());
         crit.add(Restrictions.like("title", title + "%"));
         return milestoneDao.findCritList(crit);
     }
 
     @Override
-    public List<? extends EntityInterface> findMilestoneByDueDate(Date date) {
+    public List<Milestone> findMilestoneByDueDate(Date date) {
         Criteria crit = milestoneDao.createCrit(new Milestone());
         crit.add(Restrictions.eq("dueDate", date));
         return milestoneDao.findCritList(crit);
@@ -41,7 +40,7 @@ public class MilestoneServiceImpl implements MilestoneService {
 
     // TODO : handle nulls
     @Override
-    public List<? extends EntityInterface> findMilestonesBetweenDates(Date startDate, Date endDate) {
+    public List<Milestone> findMilestonesBetweenDates(Date startDate, Date endDate) {
         Criteria crit = milestoneDao.createCrit(new Milestone());
         crit.add(Restrictions.between("dueDate", startDate, endDate));
         return milestoneDao.findCritList(crit);

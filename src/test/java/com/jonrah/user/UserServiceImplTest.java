@@ -30,32 +30,40 @@ public class UserServiceImplTest {
     private String email = "email";
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() {}
 
-    }
-
+    /**
+     * Tests the add, update, remove and restore by id methods of the UserService
+     * @throws NotFoundException
+     */
     @Test
     public void testAddAndDeleteUser() throws NotFoundException {
 
         // Get the original amount of Users in the database
         int size = impl.findAllUsers().size();
         User user = createUser();
-        // Add the new user
-        impl.addUser(user);
-        // Check the amount of Users now includes our added User
-        assertEquals(size + 1, impl.findAllUsers().size());
 
-        long id = user.getId();
+        // If the user already exists lets not try to add them again
+        if( impl.findUserByLogin(user.getUserName()).size() == 0 ) {
+            // Add the new user
+            impl.addUser(user);
+            // Check the amount of Users now includes our added User
+            assertEquals(size + 1, impl.findAllUsers().size());
+
+        }
         String newFirstName = "blahblah";
         // Change the users first name
         user.setFirstName(newFirstName);
         // Update the user to include the new first name
         impl.updateUser(user);
 
+        long id = user.getId();
         // Retrieve the updated user
         User updatedUser = impl.restoreUserById(id);
         // Make sure the change in first name is reflected
         assertEquals(newFirstName, updatedUser.getFirstName());
+        // Check that the user type was set automatically to GENERIC
+        assertEquals(UserType.GENERIC, updatedUser.getUserType());
 
         // Finally remove the user to complete the test
         impl.removeUser(user);
@@ -63,6 +71,10 @@ public class UserServiceImplTest {
         assertEquals(size, impl.findAllUsers().size());
     }
 
+    /**
+     * Test the remove by User Id method throws the correct exception
+     * @throws NotFoundException
+     */
     @Test(expected = NotFoundException.class)
     public void testRemoveNFE() throws NotFoundException{
         try {
@@ -81,6 +93,6 @@ public class UserServiceImplTest {
      * @return
      */
     private User createUser() {
-        return new User(userName, password, firstName, lastName, UserGender.MALE, email, UserType.GENERIC);
+        return new User(userName, password, firstName, lastName, UserGender.MALE, email);
     }
 }
