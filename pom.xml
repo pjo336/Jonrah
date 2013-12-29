@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
     <properties>
-        <spring.version>3.2.3.RELEASE</spring.version>
+        <spring.version>3.2.6.RELEASE</spring.version>
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
     </properties>
 
@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.28</version>
+			<version>5.1.6</version>
 		</dependency>
 
 		<!-- spring framework -->
