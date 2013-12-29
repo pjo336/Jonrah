@@ -134,8 +134,8 @@ public class Issue implements EntityInterface {
         this.title = title;
     }
 
-    public String getStatus() {
-        return status;
+    public IssueStatus getStatus() {
+        return IssueStatus.getIssueStatus(status);
     }
 
     public void setStatus(String status) {

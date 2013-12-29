@@ -4,6 +4,7 @@ package com.jonrah.trustt.type;
  * User: Peter Johnston
  * Date: 12/28/13
  */
+
 public enum IssueTypes {
 
     BUG("0", "Bug"),
@@ -23,8 +24,10 @@ public enum IssueTypes {
     public String value() {
         return String.valueOf(ordinal());
     }
+    // TODO fix these
     public String getIssueTypeName() {return this.issueTypeName;}
 
+    // TODO fix these
     public static IssueTypes getIssueTypes(String issueTypesString) {
         for (IssueTypes type : IssueTypes.values()) {
             if(type.value().equals(issueTypesString)) {

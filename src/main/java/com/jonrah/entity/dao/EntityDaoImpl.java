@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Every concrete DAO must extend this class
  */
+
 @Transactional(propagation= Propagation.REQUIRED, readOnly=false)
 public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface {
 

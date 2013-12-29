@@ -4,6 +4,7 @@ import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.milestone.Milestone;
 import com.jonrah.trustt.type.IssueType;
+import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.user.User;
 import com.jonrah.user.UserGender;
 import com.jonrah.user.UserType;
@@ -55,7 +56,7 @@ public class IssueTest {
 
             // Create an issue type
             IssueType issueType = new IssueType();
-            issueType.setName("Bug");
+            issueType.setName(IssueTypes.BUG);
             session.saveOrUpdate(issueType);
 
             // Now create the issue and attach it to the users, type and milestone created above
