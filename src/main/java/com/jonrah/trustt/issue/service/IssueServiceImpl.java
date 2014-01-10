@@ -33,8 +33,9 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public void addIssue(Issue issue) {
         issue.setStatus(IssueStatus.OPEN.getIssueStatusName());
-        User user = userService.findUserByLogin("pjo336").get(0);
-        issue.setCreatedById(user);
+        // TODO: once we get login working, pull the user off of the security context and add them on the issue.
+//        User user = userService.findUserByLogin("pjo336").get(0);
+//        issue.setCreatedById(user);
         issueDao.add(issue);
     }
 

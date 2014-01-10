@@ -13,8 +13,8 @@ public enum IssueStatus {
     DUPLICATE("3", "Duplicate"),
     ASSIGNED("4", "Assigned to User");
 
-    public String issueStatusValue;
-    public String issueStatusName;
+    private String issueStatusValue;
+    private String issueStatusName;
 
     private IssueStatus(String value, String name) {
         this.issueStatusValue = value;
@@ -24,8 +24,11 @@ public enum IssueStatus {
     public String value() {
         return String.valueOf(ordinal());
     }
+
     // TODO fix these
-    public String getIssueStatusName() {return this.issueStatusName;}
+    public String getIssueStatusName() {
+        return this.issueStatusName;
+    }
 
     // TODO fix these
     public static IssueStatus getIssueStatus(String issueStatusString) {
