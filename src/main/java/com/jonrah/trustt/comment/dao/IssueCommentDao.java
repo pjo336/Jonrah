@@ -1,6 +1,6 @@
 package com.jonrah.trustt.comment.dao;
 
-import com.jonrah.entity.dao.EntityDaoInterface;
+import com.jonrah.entity.dao.EntityDao;
 import com.jonrah.trustt.comment.IssueComment;
 
 /**
@@ -8,6 +8,6 @@ import com.jonrah.trustt.comment.IssueComment;
  * biggertime
  */
 
-public interface IssueCommentDao extends EntityDaoInterface<IssueComment> {
+public interface IssueCommentDao extends EntityDao<IssueComment> {
 
 }

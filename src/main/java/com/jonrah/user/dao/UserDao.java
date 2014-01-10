@@ -1,6 +1,6 @@
 package com.jonrah.user.dao;
 
-import com.jonrah.entity.dao.EntityDaoInterface;
+import com.jonrah.entity.dao.EntityDao;
 import com.jonrah.user.User;
 
 /**
@@ -8,7 +8,7 @@ import com.jonrah.user.User;
  * biggertime
  */
 
-public interface UserDao extends EntityDaoInterface<User> {
+public interface UserDao extends EntityDao<User> {
 
     public void updateOrCreateUser(User user);
 

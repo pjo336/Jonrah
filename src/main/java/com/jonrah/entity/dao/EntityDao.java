@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Every DAO Interface must extend this interface
  */
-public interface EntityDaoInterface<E extends EntityInterface> {
+public interface EntityDao<E extends EntityInterface> {
 
     /**
      * Create and return a Criteria object. Can be used in the service layer to create custom criteria queries

@@ -1,6 +1,6 @@
 package com.jonrah.trustt.issue.dao;
 
-import com.jonrah.entity.dao.EntityDaoInterface;
+import com.jonrah.entity.dao.EntityDao;
 import com.jonrah.trustt.issue.Issue;
 
 /**
@@ -8,6 +8,6 @@ import com.jonrah.trustt.issue.Issue;
  * biggertime
  */
 
-public interface IssueDao extends EntityDaoInterface<Issue> {
+public interface IssueDao extends EntityDao<Issue> {
 
 }

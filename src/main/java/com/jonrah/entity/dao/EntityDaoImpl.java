@@ -18,7 +18,7 @@ import java.util.List;
  * Every concrete DAO must extend this class
  */
 @Component
-public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface<E> {
+public class EntityDaoImpl<E extends EntityInterface> implements EntityDao<E> {
 
     @Autowired
     private SessionFactory sessionFactory;
