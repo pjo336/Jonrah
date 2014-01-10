@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pjo336 on 12/26/13
@@ -24,8 +26,10 @@ public class TrusttController {
 
     @RequestMapping("/trustt")
     public ModelAndView getTrustHomePage(@ModelAttribute("issue") Issue issue, BindingResult result) {
-
-        return new ModelAndView("trustt/trustt-homepage", "model", new HashMap<String, Object>());
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<Issue> issues = issueService.findAllIssues();
+        model.put("issues", issues);
+        return new ModelAndView("trustt/trustt-homepage", model);
     }
 
     @RequestMapping("/createIssue")

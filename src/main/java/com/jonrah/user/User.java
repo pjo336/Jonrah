@@ -5,6 +5,7 @@ import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.issue.Issue;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -161,8 +162,8 @@ public class User implements EntityInterface {
         this.userType = userType.value();
     }
 
-    public Date getDateAdded() {
-        return dateAdded;
+    public String getDateAdded() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(dateAdded);
     }
 
     public void setDateAdded(Date dateAdded) {

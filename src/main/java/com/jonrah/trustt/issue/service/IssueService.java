@@ -22,6 +22,11 @@ public interface IssueService {
      */
     public void removeIssue(Issue issue);
 
+    /**
+     * Return a list of all active Issues in the database
+     * @return
+     */
+    public List<Issue> findAllIssues();
 
     /**
      * Find issues with titles similiar to param given. This currently searches on "like title%" so it can match

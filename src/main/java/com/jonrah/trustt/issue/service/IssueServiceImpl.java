@@ -49,6 +49,12 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
+    public List<Issue> findAllIssues() {
+        Criteria crit = issueDao.createCrit(new Issue());
+        return issueDao.findCritList(crit);
+    }
+
+    @Override
     public List<Issue> findIssueByTitle(String title) {
         Criteria crit = issueDao.createCrit(new Issue());
         crit.add(Restrictions.like("title", title + "%"));

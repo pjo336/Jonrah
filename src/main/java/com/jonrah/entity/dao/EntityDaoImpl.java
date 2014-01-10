@@ -5,8 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -18,8 +17,7 @@ import java.util.List;
 /**
  * Every concrete DAO must extend this class
  */
-
-@Transactional(propagation= Propagation.REQUIRED, readOnly=false)
+@Component
 public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface {
 
     @Autowired
@@ -35,7 +33,7 @@ public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterf
 
     @Override
     public Criteria createCrit(EntityInterface clazz) {
-        return sessionFactory.openSession().createCriteria(clazz.getClass());
+        return currentSession().createCriteria(clazz.getClass());
     }
 
     @Override

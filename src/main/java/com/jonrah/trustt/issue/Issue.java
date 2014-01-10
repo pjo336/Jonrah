@@ -150,16 +150,16 @@ public class Issue implements EntityInterface {
         this.description = description;
     }
 
-    public IssueType getType() {
-        return type;
+    public String getType() {
+        return type.getName();
     }
 
     public void setType(IssueType type) {
         this.type = type;
     }
 
-    public String getPriority() {
-        return priority;
+    public IssuePriority getPriority() {
+        return IssuePriority.getIssuePriorities(priority);
     }
 
     public void setPriority(String priority) {
