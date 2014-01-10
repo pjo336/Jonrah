@@ -1,6 +1,7 @@
 package com.jonrah.trustt.comment.dao;
 
 import com.jonrah.entity.dao.EntityDaoImpl;
+import com.jonrah.trustt.comment.IssueComment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,6 +10,6 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class IssueCommentDaoImpl extends EntityDaoImpl implements IssueCommentDao {
+public class IssueCommentDaoImpl extends EntityDaoImpl<IssueComment> implements IssueCommentDao {
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class UserDaoImpl extends EntityDaoImpl implements UserDao {
+public class UserDaoImpl extends EntityDaoImpl<User> implements UserDao {
 
     @Override
     public void updateOrCreateUser(User user) {

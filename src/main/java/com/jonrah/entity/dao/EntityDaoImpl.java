@@ -18,14 +18,14 @@ import java.util.List;
  * Every concrete DAO must extend this class
  */
 @Component
-public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface {
+public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterface<E> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     /**
      * Get the current session
-     * @return
+     * @return the current session
      */
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();
@@ -53,6 +53,6 @@ public class EntityDaoImpl<E extends EntityInterface> implements EntityDaoInterf
 
     @Override
     public List<E> findCritList(Criteria crit) {
-        return crit.list();
+        return (List<E>) crit.list();
     }
 }

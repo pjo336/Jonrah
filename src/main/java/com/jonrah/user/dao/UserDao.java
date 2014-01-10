@@ -8,7 +8,7 @@ import com.jonrah.user.User;
  * biggertime
  */
 
-public interface UserDao extends EntityDaoInterface {
+public interface UserDao extends EntityDaoInterface<User> {
 
     public void updateOrCreateUser(User user);
 
