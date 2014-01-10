@@ -1,6 +1,6 @@
 package com.jonrah.trustt.milestone;
 
-import com.jonrah.entity.EntityInterface;
+import com.jonrah.entity.JonrahEntity;
 import com.jonrah.trustt.issue.Issue;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "JONRAH_MILESTONE")
-public class Milestone implements EntityInterface {
+public class Milestone implements JonrahEntity {
 
     public Milestone(){}
 

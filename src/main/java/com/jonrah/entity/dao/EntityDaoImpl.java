@@ -1,6 +1,6 @@
 package com.jonrah.entity.dao;
 
-import com.jonrah.entity.EntityInterface;
+import com.jonrah.entity.JonrahEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +18,7 @@ import java.util.List;
  * Every concrete DAO must extend this class
  */
 @Component
-public class EntityDaoImpl<E extends EntityInterface> implements EntityDao<E> {
+public class EntityDaoImpl<E extends JonrahEntity> implements EntityDao<E> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -32,22 +32,22 @@ public class EntityDaoImpl<E extends EntityInterface> implements EntityDao<E> {
     }
 
     @Override
-    public Criteria createCrit(EntityInterface clazz) {
+    public Criteria createCrit(JonrahEntity clazz) {
         return currentSession().createCriteria(clazz.getClass());
     }
 
     @Override
-    public void add(EntityInterface entity) {
+    public void add(JonrahEntity entity) {
         currentSession().save(entity);
     }
 
     @Override
-    public void update(EntityInterface entity) {
+    public void update(JonrahEntity entity) {
         currentSession().update(entity);
     }
 
     @Override
-    public void remove(EntityInterface entity) {
+    public void remove(JonrahEntity entity) {
         currentSession().delete(entity);
     }
 

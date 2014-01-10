@@ -1,6 +1,6 @@
 package com.jonrah.user;
 
-import com.jonrah.entity.EntityInterface;
+import com.jonrah.entity.JonrahEntity;
 import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.issue.Issue;
 
@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "JONRAH_USER")
-public class User implements EntityInterface {
+public class User implements JonrahEntity {
 
     public User() {}
 
