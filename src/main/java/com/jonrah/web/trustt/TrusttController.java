@@ -57,16 +57,26 @@ public class TrusttController {
      * Serve the issue creation form.
      */
     @RequestMapping(value = "/trustt/issue", method = RequestMethod.GET)
-    public String serveIssueForm() {
-        return "create-issue";
+    public String serveIssueForm(@ModelAttribute("issue") Issue issue, ModelMap model) {
+
+        // List all the possible IssueTypes
+        List<String> typeNames = new ArrayList<String>();
+        for(IssueTypes type: IssueTypes.values()) {
+            typeNames.add(type.name());
+        }
+
+        // Add the type names on the model
+        model.put("types", IssueTypes.values());
+
+        return "trustt-create-issue";
     }
 
     /**
      * submit the issue creation form.
      */
     @RequestMapping(value = "/trustt/issue", method = RequestMethod.POST)
-    public String submitIssueForm(@ModelAttribute("user") User user) {
+    public String submitIssueForm(@ModelAttribute("issue") Issue issue) {
         // TODO:
-        return "create-issue";
+        return "trustt-issue-detail";
     }
 }

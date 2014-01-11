@@ -36,4 +36,14 @@ public enum IssueTypes {
         }
         return null;
     }
+
+    public static IssueType getIssueType(String issueTypesString) {
+        for (IssueTypes type : IssueTypes.values()) {
+            if(type.value().equals(issueTypesString)) {
+                return new IssueType(type.name());
+            }
+        }
+
+        return null;
+    }
 }

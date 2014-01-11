@@ -83,7 +83,7 @@ public class IssueTest {
             issue.setCreatedById(user);
             issue.setLastModifiedById(user);
             issue.setOwnerId(user2);
-            issue.setType(issueType);
+            issue.setType(issueType.getName());
             issue.setMilestoneId(milestone);
 
             issueService.addIssue(issue);
