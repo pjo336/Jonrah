@@ -3,7 +3,7 @@ package com.jonrah.entity.dao;
 import com.jonrah.entity.JonrahEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Every concrete DAO must extend this class
  */
-@Component
+@Repository
 public class EntityDaoImpl<E extends JonrahEntity> implements EntityDao<E> {
 
     @PersistenceContext()

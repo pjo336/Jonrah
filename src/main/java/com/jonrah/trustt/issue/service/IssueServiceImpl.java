@@ -6,14 +6,12 @@ import com.jonrah.trustt.issue.dao.IssueDao;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
 import com.jonrah.user.service.UserService;
+import com.jonrah.util.SecurityUtils;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -36,16 +34,14 @@ public class IssueServiceImpl implements IssueService {
     IssueTypeService issueTypeService;
 
     // TODO fix these methods to involve validation
-    // TODO this method is working using static data, make it use real input
     @Override
     public void addIssue(Issue issue) throws AccessDeniedException {
         // All created issues start out as open
         issue.setStatus(IssueStatus.OPEN.value());
         // Check who the current user creating this issue is and get their name
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
+        String name = SecurityUtils.getCurrentUserName();
         if(name.equals("anonymousUser")) {
-            throw new AccessDeniedException("This user is a bitch");
+            throw new AccessDeniedException("This user is not logged in and cannot create an issue");
         } else {
             User user = userService.findUserByLogin(name).get(0);
             issue.setCreatedById(user);
