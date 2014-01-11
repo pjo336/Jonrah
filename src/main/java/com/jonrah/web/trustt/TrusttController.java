@@ -100,4 +100,17 @@ public class TrusttController {
 
         return "trustt-issue-detail";
     }
+
+    /**
+     * Display the details of a single issue.
+     */
+    @RequestMapping(value = "/trustt/issues", method = RequestMethod.GET)
+    public String serveAllIssues(ModelMap model) throws NotFoundException {
+
+        List<Issue> issues = issueService.findAllIssues();
+        // Add the issue on the model.
+        model.put("issues", issues);
+
+        return "trustt-issue-list";
+    }
 }
