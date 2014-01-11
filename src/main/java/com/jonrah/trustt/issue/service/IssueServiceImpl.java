@@ -3,6 +3,7 @@ package com.jonrah.trustt.issue.service;
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.IssueStatus;
 import com.jonrah.trustt.issue.dao.IssueDao;
+import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
 import com.jonrah.user.service.UserService;
 import org.hibernate.Criteria;
@@ -28,11 +29,14 @@ public class IssueServiceImpl implements IssueService {
 
     @Autowired
     UserService userService;
+    @Autowired
+    IssueTypeService issueTypeService;
 
     // TODO fix these methods to involve validation
+    // TODO this method is working using static data, make it use real input
     @Override
     public void addIssue(Issue issue) {
-        issue.setStatus(IssueStatus.OPEN.getIssueStatusName());
+        issue.setStatus(IssueStatus.OPEN.value());
         User user = userService.findUserByLogin("pjo336").get(0);
         issue.setCreatedById(user);
         issueDao.add(issue);
