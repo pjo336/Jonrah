@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -23,6 +22,11 @@ public class MilestoneServiceImpl implements MilestoneService {
 
     @Autowired
     MilestoneDao milestoneDao;
+
+    @Override
+    public void addMilestone(Milestone milestone) {
+        milestoneDao.add(milestone);
+    }
 
     @Override
     public List<Milestone> findMilestoneByTitle(String title) {

@@ -1,10 +1,12 @@
 package com.jonrah.trustt.issue;
 
 import com.jonrah.trustt.comment.IssueComment;
+import com.jonrah.trustt.comment.service.IssueCommentService;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.milestone.Milestone;
+import com.jonrah.trustt.milestone.service.MilestoneService;
 import com.jonrah.trustt.type.IssueType;
-import com.jonrah.trustt.type.IssueTypes;
+import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
 import com.jonrah.user.UserGender;
 import com.jonrah.user.UserType;
@@ -16,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by pjo336 on 12/25/13
@@ -27,7 +30,13 @@ import java.util.List;
 public class IssueTest {
 
     @Autowired
+    private IssueCommentService issueCommentService;
+    @Autowired
     private IssueService issueService;
+    @Autowired
+    private IssueTypeService issueTypeService;
+    @Autowired
+    private MilestoneService milestoneService;
     @Autowired
     private UserService userService;
 
@@ -36,42 +45,56 @@ public class IssueTest {
      */
     @Test
     public void testIssue() {
-//        if(issueService.findIssueByTitle("").size() == 0 && userService.findAllUsers().size() == 0) {
-//            // Create users for the issue
-//            User user = new User("herp", "derp", "slerp", "merp", UserGender.MALE, "purp", UserType.FULL_ACCESS);
-//            session.saveOrUpdate(user);
-//            User peter = new User("pjo336", "123", "Peter", "Johnston", UserGender.MALE, "pjohnston", UserType.ADMIN);
-//            session.saveOrUpdate(peter);
-//
-//            // Create a milestone for the issue
-//            Milestone milestone = new Milestone();
-//            milestone.setTitle("First Release");
-//            session.saveOrUpdate(milestone);
-//
-//            // Create an issue type
-//            IssueType issueType = new IssueType();
-//            issueType.setName(IssueTypes.BUG);
-//            session.saveOrUpdate(issueType);
-//
-//            // Now create the issue and attach it to the users, type and milestone created above
-//            Issue issue = createIssue();
-//            issue.setAssignedToId(peter);
-//            issue.setCreatedById(user);
-//            issue.setLastModifiedById(user);
-//            issue.setOwnerId(peter);
-//            issue.setType(issueType);
-//            issue.setMilestoneId(milestone);
-//            session.saveOrUpdate(issue);
-//
-//            // Finally add a comment to the bug
-//            IssueComment comment = new IssueComment();
-//            comment.setComment("This is the first comment on this bug. This bug sucks bruh");
-//            comment.setCommenter(peter);
-//            comment.setBugId(issue);
-//            session.saveOrUpdate(comment);
-//        }
-//        session.getTransaction().commit();
-//        session.close();
+        String issueTitle = UUID.randomUUID().toString();
+        String userName1 = "TestUser";
+        String userName2 = "TestUser2";
+        String milestoneName = "First Release";
+        User user2, user;
+        Milestone milestone;
+        if(issueService.findIssueByTitle(issueTitle).size() == 0 ) {
+
+            if(userService.findUserByLogin(userName1).size() == 0 && userService.findUserByLogin(userName2).size() == 0) {
+                // Create users for the issue
+                user = new User(userName1, userName1, userName1, userName1, UserGender.MALE, userName1, UserType.FULL_ACCESS);
+                userService.addUser(user);
+                user2 = new User(userName2, userName2, userName2, userName2, UserGender.MALE, userName2, UserType.ADMIN);
+                userService.addUser(user2);
+            } else {
+                user = userService.findUserByLogin(userName1).get(0);
+                user2 = userService.findUserByLogin(userName2).get(0);
+            }
+
+            if(milestoneService.findMilestoneByTitle(milestoneName).size() == 0) {
+                // Create a milestone for the issue
+                milestone = new Milestone();
+                milestone.setTitle("First Release");
+                milestoneService.addMilestone(milestone);
+            } else {
+                milestone = milestoneService.findMilestoneByTitle(milestoneName).get(0);
+            }
+
+            // Grab an issue type
+            IssueType issueType = issueTypeService.findAllIssueTypes().get(0);
+
+            // Now create the issue and attach it to the users, type and milestone created above
+            Issue issue = createIssue();
+            issue.setTitle(issueTitle);
+            issue.setAssignedToId(user2);
+            issue.setCreatedById(user);
+            issue.setLastModifiedById(user);
+            issue.setOwnerId(user2);
+            issue.setType(issueType);
+            issue.setMilestoneId(milestone);
+
+            issueService.addIssue(issue);
+
+            // Finally add a comment to the bug
+            IssueComment comment = new IssueComment();
+            comment.setComment("This is the first comment on this bug. This bug sucks bruh");
+            comment.setCommenter(user2);
+            comment.setBugId(issue);
+            issueCommentService.addComment(comment);
+        }
     }
 
     @Test

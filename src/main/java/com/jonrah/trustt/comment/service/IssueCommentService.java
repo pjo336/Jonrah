@@ -12,6 +12,12 @@ import java.util.List;
 public interface IssueCommentService {
 
     /**
+     * Adds a comment to the database
+     * @param comment
+     */
+    public void addComment(IssueComment comment);
+
+    /**
      * Return a list of all the comments made by the user with this id
      * @param userId
      * @return

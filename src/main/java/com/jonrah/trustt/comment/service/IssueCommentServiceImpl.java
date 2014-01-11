@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,6 +21,11 @@ public class IssueCommentServiceImpl implements IssueCommentService {
 
     @Autowired
     IssueCommentDao issueCommentDao;
+
+    @Override
+    public void addComment(IssueComment comment) {
+        issueCommentDao.add(comment);
+    }
 
     @Override
     public List<IssueComment> findAllCommentsByUser(long userId) {

@@ -13,6 +13,11 @@ import java.util.List;
 public interface MilestoneService {
 
     /**
+     * This adds a milestone to the database
+     */
+    public void addMilestone(Milestone milestone);
+
+    /**
      * Returns a list of all milestones based on the given title. This currently searches on "like title%" so it can
      * match with more than just exact titles. Could use more retooling in the future
      * @param title

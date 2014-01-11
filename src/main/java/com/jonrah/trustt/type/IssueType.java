@@ -18,6 +18,10 @@ public class IssueType implements JonrahEntity {
 
     public IssueType() {}
 
+    public IssueType(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")
