@@ -36,7 +36,7 @@ public class IssueServiceImpl implements IssueService {
     // TODO this method is working using static data, make it use real input
     @Override
     public void addIssue(Issue issue) {
-        issue.setStatus(IssueStatus.OPEN.value());
+        issue.setStatus(IssueStatus.OPEN.getIssueStatusName());
         User user = userService.findUserByLogin("pjo336").get(0);
         issue.setCreatedById(user);
         issueDao.add(issue);
