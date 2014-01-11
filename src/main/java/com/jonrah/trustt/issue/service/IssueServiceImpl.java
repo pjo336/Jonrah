@@ -7,6 +7,7 @@ import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
 import com.jonrah.user.service.UserService;
 import com.jonrah.util.SecurityUtils;
+import javassist.NotFoundException;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,18 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public void removeIssue(Issue issue) {
         issueDao.remove(issue);
+    }
+
+    @Override
+    public Issue restoreIssueById(long id) throws NotFoundException {
+        Criteria crit = issueDao.createCrit(new Issue());
+        crit.add(Restrictions.eq("id", id));
+        List<Issue> issues = issueDao.findCritList(crit);
+        if(issues.size() == 0) {
+            throw new NotFoundException("An issue with this id was not found");
+        } else {
+            return issues.get(0);
+        }
     }
 
     @Override

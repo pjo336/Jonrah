@@ -1,6 +1,7 @@
 package com.jonrah.trustt.issue.service;
 
 import com.jonrah.trustt.issue.Issue;
+import javassist.NotFoundException;
 
 import java.util.List;
 
@@ -29,6 +30,15 @@ public interface IssueService {
      * @param issue
      */
     public void removeIssue(Issue issue);
+
+    /**
+     * Restores one issue based on the id given. Throws exception if not found. If multiple are found it returns
+     * the first found.
+     * @param id
+     * @return Issue with the given id
+     * @throws NotFoundException
+     */
+    public Issue restoreIssueById(long id) throws NotFoundException;
 
     /**
      * Return a list of all active Issues in the database
