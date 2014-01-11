@@ -151,6 +151,7 @@ public class Issue implements JonrahEntity {
     }
 
     public String getType() {
+        //TODO nullpointer being thrown when displaying issue type on /trustt
         return type.getName();
     }
 

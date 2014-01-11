@@ -2,6 +2,8 @@ package com.jonrah.web.trustt;
 
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
+import com.jonrah.trustt.type.IssueType;
+import com.jonrah.trustt.type.service.IssueTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,12 +25,22 @@ public class TrusttController {
 
     @Autowired
     IssueService issueService;
+    @Autowired
+    IssueTypeService issueTypeService;
 
     @RequestMapping("/trustt")
     public ModelAndView getTrustHomePage(@ModelAttribute("issue") Issue issue, BindingResult result) {
         Map<String, Object> model = new HashMap<String, Object>();
+
+        // Find all the issues
         List<Issue> issues = issueService.findAllIssues();
+        // Find all the possible IssueTypes
+        List<IssueType> types = issueTypeService.findAllIssueTypes();
+
+        // Put the issues and the possible types on the model
         model.put("issues", issues);
+        model.put("types", types);
+
         return new ModelAndView("trustt/trustt-homepage", model);
     }
 

@@ -129,6 +129,16 @@
             </tr>
 
             <tr>
+                <td><form:label path="description">Description</form:label></td>
+                <td><form:input path="description"/></td>
+            </tr>
+
+            <%--<tr>--%>
+                <%--<td><form:label path="type">Description</form:label></td>--%>
+                <%--<td><<form:radiobuttons path="type" items="${model.types}"/></td>--%>
+            <%--</tr>--%>
+
+            <tr>
                 <td></td>
                 <td><input type="submit" value="Create"/></td>
             </tr>
