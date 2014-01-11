@@ -72,10 +72,4 @@ public class IndexController {
         Map<String, Object> model = new HashMap<String, Object>();
         return new ModelAndView("admin-page", "model", model);
     }
-
-    @RequestMapping("/bootstrap-test")
-    public ModelAndView loadTest() {
-        Map<String, Object> model = new HashMap<String, Object>();
-        return new ModelAndView("bootstrap-test", "model", model);
-    }
 }

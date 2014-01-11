@@ -3,10 +3,10 @@ package com.jonrah.entity.dao;
 import com.jonrah.entity.JonrahEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -20,35 +20,27 @@ import java.util.List;
 @Component
 public class EntityDaoImpl<E extends JonrahEntity> implements EntityDao<E> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    /**
-     * Get the current session
-     * @return the current session
-     */
-    protected Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
+    @PersistenceContext()
+    protected EntityManager entityManager;
 
     @Override
     public Criteria createCrit(JonrahEntity clazz) {
-        return currentSession().createCriteria(clazz.getClass());
+        return entityManager.unwrap(Session.class).createCriteria(clazz.getClass());
     }
 
     @Override
     public void add(JonrahEntity entity) {
-        currentSession().save(entity);
+        entityManager.persist(entity);
     }
 
     @Override
     public void update(JonrahEntity entity) {
-        currentSession().update(entity);
+        entityManager.merge(entity);
     }
 
     @Override
     public void remove(JonrahEntity entity) {
-        currentSession().delete(entity);
+        entityManager.remove(entity);
     }
 
     @Override

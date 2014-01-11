@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+@Transactional
 public class MilestoneServiceImpl implements MilestoneService {
 
     @Autowired

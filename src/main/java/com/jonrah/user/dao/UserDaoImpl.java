@@ -14,6 +14,6 @@ public class UserDaoImpl extends EntityDaoImpl<User> implements UserDao {
 
     @Override
     public void updateOrCreateUser(User user) {
-        super.currentSession().saveOrUpdate(user);
+        entityManager.merge(user);
     }
 }

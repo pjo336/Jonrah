@@ -54,7 +54,9 @@ public class Issue implements JonrahEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "type")
+    @JoinColumn(
+            name = "type",
+            nullable = false)
     private IssueType type;
 
     @Column(name = "priority")
