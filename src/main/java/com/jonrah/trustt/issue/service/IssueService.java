@@ -10,8 +10,16 @@ import java.util.List;
  */
 public interface IssueService {
 
+    /**
+     * This adds an issue to the database
+     * @param issue
+     */
     public void addIssue(Issue issue);
 
+    /**
+     * Updates the issue passed in if it is in the database
+     * @param issue
+     */
     public void updateIssue(Issue issue);
 
     /**
