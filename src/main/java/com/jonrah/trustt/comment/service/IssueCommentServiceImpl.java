@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+@Transactional
 public class IssueCommentServiceImpl implements IssueCommentService {
 
     @Autowired

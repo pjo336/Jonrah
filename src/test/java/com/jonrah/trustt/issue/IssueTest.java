@@ -9,8 +9,6 @@ import com.jonrah.user.User;
 import com.jonrah.user.UserGender;
 import com.jonrah.user.UserType;
 import com.jonrah.user.service.UserService;
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +27,6 @@ import java.util.List;
 public class IssueTest {
 
     @Autowired
-    private SessionFactory sessionFactory;
-    @Autowired
     private IssueService issueService;
     @Autowired
     private UserService userService;
@@ -40,44 +36,42 @@ public class IssueTest {
      */
     @Test
     public void testIssue() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        if(issueService.findIssueByTitle("").size() == 0 && userService.findAllUsers().size() == 0) {
-            // Create users for the issue
-            User user = new User("herp", "derp", "slerp", "merp", UserGender.MALE, "purp", UserType.FULL_ACCESS);
-            session.saveOrUpdate(user);
-            User peter = new User("pjo336", "123", "Peter", "Johnston", UserGender.MALE, "pjohnston", UserType.ADMIN);
-            session.saveOrUpdate(peter);
-
-            // Create a milestone for the issue
-            Milestone milestone = new Milestone();
-            milestone.setTitle("First Release");
-            session.saveOrUpdate(milestone);
-
-            // Create an issue type
-            IssueType issueType = new IssueType();
-            issueType.setName(IssueTypes.BUG);
-            session.saveOrUpdate(issueType);
-
-            // Now create the issue and attach it to the users, type and milestone created above
-            Issue issue = createIssue();
-            issue.setAssignedToId(peter);
-            issue.setCreatedById(user);
-            issue.setLastModifiedById(user);
-            issue.setOwnerId(peter);
-            issue.setType(issueType);
-            issue.setMilestoneId(milestone);
-            session.saveOrUpdate(issue);
-
-            // Finally add a comment to the bug
-            IssueComment comment = new IssueComment();
-            comment.setComment("This is the first comment on this bug. This bug sucks bruh");
-            comment.setCommenter(peter);
-            comment.setBugId(issue);
-            session.saveOrUpdate(comment);
-        }
-        session.getTransaction().commit();
-        session.close();
+//        if(issueService.findIssueByTitle("").size() == 0 && userService.findAllUsers().size() == 0) {
+//            // Create users for the issue
+//            User user = new User("herp", "derp", "slerp", "merp", UserGender.MALE, "purp", UserType.FULL_ACCESS);
+//            session.saveOrUpdate(user);
+//            User peter = new User("pjo336", "123", "Peter", "Johnston", UserGender.MALE, "pjohnston", UserType.ADMIN);
+//            session.saveOrUpdate(peter);
+//
+//            // Create a milestone for the issue
+//            Milestone milestone = new Milestone();
+//            milestone.setTitle("First Release");
+//            session.saveOrUpdate(milestone);
+//
+//            // Create an issue type
+//            IssueType issueType = new IssueType();
+//            issueType.setName(IssueTypes.BUG);
+//            session.saveOrUpdate(issueType);
+//
+//            // Now create the issue and attach it to the users, type and milestone created above
+//            Issue issue = createIssue();
+//            issue.setAssignedToId(peter);
+//            issue.setCreatedById(user);
+//            issue.setLastModifiedById(user);
+//            issue.setOwnerId(peter);
+//            issue.setType(issueType);
+//            issue.setMilestoneId(milestone);
+//            session.saveOrUpdate(issue);
+//
+//            // Finally add a comment to the bug
+//            IssueComment comment = new IssueComment();
+//            comment.setComment("This is the first comment on this bug. This bug sucks bruh");
+//            comment.setCommenter(peter);
+//            comment.setBugId(issue);
+//            session.saveOrUpdate(comment);
+//        }
+//        session.getTransaction().commit();
+//        session.close();
     }
 
     @Test
