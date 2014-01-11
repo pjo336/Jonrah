@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,7 +57,7 @@ public class TrusttController {
     /**
      * Serve the issue creation form.
      */
-    @RequestMapping(value = "/trustt/issue", method = RequestMethod.GET)
+    @RequestMapping(value = "/trustt/create-issue", method = RequestMethod.GET)
     public String serveIssueForm(@ModelAttribute("issue") Issue issue, ModelMap model) {
 
         // List all the possible IssueTypes
@@ -74,9 +75,24 @@ public class TrusttController {
     /**
      * submit the issue creation form.
      */
-    @RequestMapping(value = "/trustt/issue", method = RequestMethod.POST)
+    @RequestMapping(value = "/trustt/create-issue", method = RequestMethod.POST)
     public String submitIssueForm(@ModelAttribute("issue") Issue issue) {
         // TODO:
+        return "trustt-issue-detail";
+    }
+
+    /**
+     * Display the details of a single issue.
+     */
+    @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.GET)
+    public String serveSingleIssue(@PathVariable long issueId, ModelMap model) {
+
+        Issue issue = new Issue();
+        issue.setId(issueId);
+
+        // Add the issue on the model.
+        model.put("issue", issue);
+
         return "trustt-issue-detail";
     }
 }
