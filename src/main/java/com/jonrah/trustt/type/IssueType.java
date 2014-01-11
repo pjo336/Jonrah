@@ -84,4 +84,9 @@ public class IssueType implements JonrahEntity {
     public void setReferencedIssueTypes(Set<Issue> referencedIssueTypes) {
         this.referencedIssueTypes = referencedIssueTypes;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -25,7 +25,7 @@
             </tr>
 
             <tr>
-                <td><form:button type="submit" value="Create" /></td>
+                <td><form:button type="submit" value="Create">Create</form:button></td>
             </tr>
         </table>
     </form:form>

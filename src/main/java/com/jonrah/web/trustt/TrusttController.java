@@ -5,7 +5,9 @@ import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -60,14 +62,8 @@ public class TrusttController {
     @RequestMapping(value = "/trustt/create-issue", method = RequestMethod.GET)
     public String serveIssueForm(@ModelAttribute("issue") Issue issue, ModelMap model) {
 
-        // List all the possible IssueTypes
-        List<String> typeNames = new ArrayList<String>();
-        for(IssueTypes type: IssueTypes.values()) {
-            typeNames.add(type.name());
-        }
-
         // Add the type names on the model
-        model.put("types", IssueTypes.values());
+        model.put("types", issueTypeService.findAllIssueTypes());
 
         return "trustt-create-issue";
     }
@@ -77,19 +73,17 @@ public class TrusttController {
      */
     @RequestMapping(value = "/trustt/create-issue", method = RequestMethod.POST)
     public String submitIssueForm(@ModelAttribute("issue") Issue issue) {
-        // TODO:
-        return "trustt-issue-detail";
+        issueService.addIssue(issue);
+        return "redirect:/trustt/issue/" + issue.getId();
     }
 
     /**
      * Display the details of a single issue.
      */
     @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.GET)
-    public String serveSingleIssue(@PathVariable long issueId, ModelMap model) {
+    public String serveSingleIssue(@PathVariable long issueId, ModelMap model) throws NotFoundException {
 
-        Issue issue = new Issue();
-        issue.setId(issueId);
-
+        Issue issue = issueService.restoreIssueById(issueId);
         // Add the issue on the model.
         model.put("issue", issue);
 

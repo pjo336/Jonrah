@@ -55,9 +55,7 @@ public class Issue implements JonrahEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(
-            name = "type",
-            nullable = false)
+    @JoinColumn(name = "type")
     private IssueType type;
 
     @Column(name = "priority")
@@ -153,16 +151,12 @@ public class Issue implements JonrahEntity {
         this.description = description;
     }
 
-    public String getType() {
-        //TODO nullpointer being thrown when displaying issue type on /trustt
-        if(type == null) {
-            return "";
-        }
-        return type.getName();
+    public IssueType getType() {
+        return type;
     }
 
-    public void setType(String type) {
-        this.type = IssueTypes.getIssueType(type);
+    public void setType(IssueType type) {
+        this.type = type;
     }
 
     public IssuePriority getPriority() {

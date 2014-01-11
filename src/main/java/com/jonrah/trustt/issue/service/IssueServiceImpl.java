@@ -40,8 +40,6 @@ public class IssueServiceImpl implements IssueService {
     public void addIssue(Issue issue) throws AccessDeniedException {
         // All created issues start out as open
         issue.setStatus(IssueStatus.OPEN.value());
-        IssueType type = issueTypeService.findIssueByName(issue.getIssueType().getName()).get(0);
-        issue.setType(type.getName());
         // Check who the current user creating this issue is and get their name
         String name = SecurityUtils.getCurrentUserName();
         if(name.equals("anonymousUser")) {
