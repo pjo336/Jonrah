@@ -1,16 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Jonrah | User Details</title>
-    <c:import url="/WEB-INF/view/parts/header.jsp"/>
-</head>
-<body>
-<c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <center>
     <div style="color: teal; font-size: 30px">Jonrah | User
         Details
@@ -164,22 +152,18 @@
 
     <script type="text/javascript">
 
-    var buttons = document.getElementsByName("panelsButton");
-    for(var x in buttons) {
-        x.onclick = function() {
-            var button = document.getElementsByName("panelsButton")[x];
-            console.log(button.className);
-            if(button.className === "glyphicon glyphicon-chevron-up text-muted") {
-                button.className = "glyphicon glyphicon-chevron-down text-muted";
-            } else if (button.className === "glyphicon glyphicon-chevron-down text-muted") {
-                button.className = "glyphicon glyphicon-chevron-up text-muted";
+        var buttons = document.getElementsByName("panelsButton");
+        for(var x in buttons) {
+            x.onclick = function() {
+                var button = document.getElementsByName("panelsButton")[x];
+                console.log(button.className);
+                if(button.className === "glyphicon glyphicon-chevron-up text-muted") {
+                    button.className = "glyphicon glyphicon-chevron-down text-muted";
+                } else if (button.className === "glyphicon glyphicon-chevron-down text-muted") {
+                    button.className = "glyphicon glyphicon-chevron-up text-muted";
+                }
             }
-        }
-    };
+        };
     </script>
 </div>
 <%--end of user information tabs--%>
-
-<c:import url="/WEB-INF/view/parts/footer.jsp"/>
-</body>
-</html>

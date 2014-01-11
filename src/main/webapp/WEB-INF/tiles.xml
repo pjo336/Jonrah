@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Abstract Layouts-->
+    <definition name="jonrah.common" template="/WEB-INF/view/layouts/common.jsp">
+        <!-- title -->
+        <put-attribute name="html-header" value="/WEB-INF/view/tiles/common/header.jsp" />
+        <put-attribute name="top-navbar" value="/WEB-INF/view/tiles/common/top-navbar.jsp" />
+        <!-- header -->
+        <!-- body -->
+        <put-attribute name="footer" value="/WEB-INF/view/tiles/common/footer.jsp" />
+    </definition>
+
+    <!-- Views -->
+    <definition name="index" extends="jonrah.common">
+        <put-attribute name="title" value="Jonrah" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/index/index-body.jsp" />
+    </definition>
+
+    <definition name="login" extends="jonrah.common">
+        <put-attribute name="title" value="Jonrah | Login" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/user/login.jsp" />
+    </definition>
+
+    <definition name="register" extends="jonrah.common">
+        <put-attribute name="title" value="Jonrah | Register" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/user/register.jsp" />
+    </definition>
+
+    <definition name="user-list" extends="jonrah.common">
+        <put-attribute name="title" value="Jonrah | User List" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/user/user-details.jsp" />
+    </definition>
+
+    <definition name="trustt-homepage" extends="jonrah.common">
+        <put-attribute name="title" value="Trustt | Welcome" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/trustt-homepage.jsp" />
+    </definition>
+
+    <definition name="admin-page" extends="jonrah.common">
+        <put-attribute name="title" value="Jonrah | SECURELOLOLOL" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/admin/admin-page.jsp" />
+    </definition>
+
+</tiles-definitions>

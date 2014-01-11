@@ -6,9 +6,11 @@ import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -30,8 +32,7 @@ public class TrusttController {
     IssueTypeService issueTypeService;
 
     @RequestMapping("/trustt")
-    public ModelAndView getTrustHomePage(@ModelAttribute("issue") Issue issue, BindingResult result) {
-        Map<String, Object> model = new HashMap<String, Object>();
+    public String getTrustHomePage(@ModelAttribute("issue") Issue issue, ModelMap model) {
 
         // Find all the issues
         List<Issue> issues = issueService.findAllIssues();
@@ -45,12 +46,12 @@ public class TrusttController {
         // Put the issues and the possible types on the model
         model.put("issues", issues);
         model.put("types", typeNames);
-        return new ModelAndView("trustt/trustt-homepage", model);
+        return "trustt-homepage";
     }
 
-    @RequestMapping("/createIssue")
-    public ModelAndView createIssue(@ModelAttribute("issue") Issue issue, BindingResult result) {
+    @RequestMapping(value="/createIssue", method = RequestMethod.POST)
+    public String createIssue(@ModelAttribute("issue") Issue issue) {
         issueService.addIssue(issue);
-        return new ModelAndView("redirect:/trustt.html");
+        return "trustt-homepage";
     }
 }
