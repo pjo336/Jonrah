@@ -9,6 +9,9 @@ import com.jonrah.user.service.UserService;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,11 +38,19 @@ public class IssueServiceImpl implements IssueService {
     // TODO fix these methods to involve validation
     // TODO this method is working using static data, make it use real input
     @Override
-    public void addIssue(Issue issue) {
-        issue.setStatus(IssueStatus.OPEN.getIssueStatusName());
-        User user = userService.findUserByLogin("pjo336").get(0);
-        issue.setCreatedById(user);
-        issueDao.add(issue);
+    public void addIssue(Issue issue) throws AccessDeniedException {
+        // All created issues start out as open
+        issue.setStatus(IssueStatus.OPEN.value());
+        // Check who the current user creating this issue is and get their name
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(name.equals("anonymousUser")) {
+            throw new AccessDeniedException("This user is a bitch");
+        } else {
+            User user = userService.findUserByLogin(name).get(0);
+            issue.setCreatedById(user);
+            issueDao.add(issue);
+        }
     }
 
     @Override

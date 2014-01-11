@@ -133,10 +133,10 @@
                 <td><form:input path="description"/></td>
             </tr>
 
-            <%--<tr>--%>
-                <%--<td><form:label path="type">Description</form:label></td>--%>
-                <%--<td><<form:radiobuttons path="type" items="${model.types}"/></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><form:label path="type">Description</form:label></td>
+                <td><form:select path="type" items="${types}"/></td>
+            </tr>
 
             <tr>
                 <td></td>

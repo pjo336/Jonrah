@@ -2,7 +2,7 @@ package com.jonrah.web.trustt;
 
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
-import com.jonrah.trustt.type.IssueType;
+import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,20 +35,22 @@ public class TrusttController {
 
         // Find all the issues
         List<Issue> issues = issueService.findAllIssues();
-        // Find all the possible IssueTypes
-        List<IssueType> types = issueTypeService.findAllIssueTypes();
+
+        // List all the possible IssueTypes
+        List<String> typeNames = new ArrayList<String>();
+        for(IssueTypes type: IssueTypes.values()) {
+            typeNames.add(type.name());
+        }
 
         // Put the issues and the possible types on the model
         model.put("issues", issues);
-        model.put("types", types);
-
+        model.put("types", typeNames);
         return new ModelAndView("trustt/trustt-homepage", model);
     }
 
     @RequestMapping("/createIssue")
     public ModelAndView createIssue(@ModelAttribute("issue") Issue issue, BindingResult result) {
         issueService.addIssue(issue);
-        System.out.println("Issue titled : " + issue.getTitle() + " was added to the database");
         return new ModelAndView("redirect:/trustt.html");
     }
 }
