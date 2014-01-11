@@ -4,6 +4,7 @@ import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.trustt.type.service.IssueTypeService;
+import com.jonrah.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,8 +32,11 @@ public class TrusttController {
     @Autowired
     IssueTypeService issueTypeService;
 
+    /**
+     * Welcome page
+     */
     @RequestMapping("/trustt")
-    public String getTrustHomePage(@ModelAttribute("issue") Issue issue, ModelMap model) {
+    public String getTrustHomePage(ModelMap model) {
 
         // Find all the issues
         List<Issue> issues = issueService.findAllIssues();
@@ -49,9 +53,20 @@ public class TrusttController {
         return "trustt-homepage";
     }
 
-    @RequestMapping(value="/createIssue", method = RequestMethod.POST)
-    public String createIssue(@ModelAttribute("issue") Issue issue) {
-        issueService.addIssue(issue);
-        return "trustt-homepage";
+    /**
+     * Serve the issue creation form.
+     */
+    @RequestMapping(value = "/trustt/issue", method = RequestMethod.GET)
+    public String serveIssueForm() {
+        return "create-issue";
+    }
+
+    /**
+     * submit the issue creation form.
+     */
+    @RequestMapping(value = "/trustt/issue", method = RequestMethod.POST)
+    public String submitIssueForm(@ModelAttribute("user") User user) {
+        // TODO:
+        return "create-issue";
     }
 }
