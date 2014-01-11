@@ -21,7 +21,7 @@
 
             <tr>
                 <td><form:label path="type">Description</form:label></td>
-                <td><form:select path="type" items="${types}"/></td>
+                <td><form:select path="type" items="${types}" /></td>
             </tr>
 
             <tr>
