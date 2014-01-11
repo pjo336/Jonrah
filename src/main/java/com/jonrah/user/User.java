@@ -163,9 +163,6 @@ public class User implements JonrahEntity {
     }
 
     public String getDateAdded() {
-        if (dateAdded == null) {
-            return null;
-        }
         return new SimpleDateFormat("yyyy-MM-dd").format(dateAdded);
     }
 

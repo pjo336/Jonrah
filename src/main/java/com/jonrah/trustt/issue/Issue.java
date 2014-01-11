@@ -151,9 +151,6 @@ public class Issue implements JonrahEntity {
     }
 
     public String getType() {
-        if (type == null) {
-            return null;
-        }
         return type.getName();
     }
 

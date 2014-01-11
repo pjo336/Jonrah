@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +26,6 @@ public class UserServiceImpl implements UserService {
             if(user.getUserType() == null) {
                 user.setUserType(UserType.GENERIC);
             }
-            user.setDateAdded(new Date());
             userDao.add(user);
         }
     }
