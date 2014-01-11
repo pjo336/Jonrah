@@ -1,13 +1,16 @@
-<!-- navigation bar at top -->
-<div class="container">
-    <div class="navbar-fixed-top navbar-inverse">
-        <ul class="nav nav-tabs">
-            <li class="navbar-brand"><a style="color: teal;" href="/">JONRAH</a></li>
-            <li class="navbar-brand rightbar" style="padding-left: 400px;"><a style="color: teal;" href="/register">Register</a></li>
-            <li class="navbar-brand rightbar"><a style="color: teal;" href="/userList">User List</a></li>
-            <li class="navbar-brand rightbar"><a style="color: teal;" href="#">About</a></li>
-            <li class="navbar-brand rightbar"><a style="color: teal;" href="/trustt">Trustt</a></li>
-            <li class="navbar-brand rightbar"><a style="color: teal;" href="/admin">Admin</a></li>
+<!-- NAVBAR
+================================================== -->
+<div id="jonrah-navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">JONRAH</a>
+        </div>
+        <ul id="jonrah-main-nav" class="nav navbar-nav nav-pills">
+            <li><a href="/register">Register</a></li>
+            <li><a href="/userList">User List</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="/trustt">Trustt</a></li>
+            <li><a href="/admin">Admin</a></li>
         </ul>
     </div>
-</div><br/><br/><br/><br/>
+</div>

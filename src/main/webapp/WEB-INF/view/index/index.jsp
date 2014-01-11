@@ -7,8 +7,6 @@
     <title>Jonrah</title>
     <c:import url="/WEB-INF/view/parts/header.jsp"/>
 </head>
-<!-- NAVBAR
-================================================== -->
 <body>
 <c:import url="/WEB-INF/view/parts/top-navbar.jsp"/>
 
