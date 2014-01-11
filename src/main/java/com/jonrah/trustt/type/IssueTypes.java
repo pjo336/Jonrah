@@ -39,7 +39,7 @@ public enum IssueTypes {
 
     public static IssueType getIssueType(String issueTypesString) {
         for (IssueTypes type : IssueTypes.values()) {
-            if(type.value().equals(issueTypesString)) {
+            if(type.name().equals(issueTypesString)) {
                 return new IssueType(type.name());
             }
         }
