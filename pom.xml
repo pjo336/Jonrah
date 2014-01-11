@@ -11,6 +11,7 @@
     <properties>
         <spring.version>3.2.6.RELEASE</spring.version>
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
+        <tiles.version>3.0.3</tiles.version>
     </properties>
 
 	<dependencies>
@@ -121,6 +122,13 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+
+        <!-- Tiles -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
 
 	</dependencies>
 

@@ -6,16 +6,14 @@ import com.jonrah.user.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -25,51 +23,54 @@ public class IndexController {
 
     @RequestMapping("/")
     public String getIndex() {
-        return "index/index";
+        return "index";
+    }
+
+    @RequestMapping(value="/index", method = RequestMethod.GET)
+    public String printWelcome(ModelMap model, Principal principal ) {
+        String name = principal.getName();
+        model.addAttribute("username", name);
+        return "index";
     }
 
     @RequestMapping("/register")
-    public ModelAndView getRegisterForm(@ModelAttribute("user") User user, BindingResult result) {
+    public String getRegisterForm(@ModelAttribute("user") User user, ModelMap model) {
 
         List<UserGender> gender = new ArrayList<UserGender>();
         for (UserGender genderName : UserGender.values()) {
             gender.add(genderName);
         }
 
-        Map<String, Object> model = new HashMap<String, Object>();
         model.put("gender", gender);
 
-        return new ModelAndView("register", "model", model);
+        return "register";
     }
 
     @RequestMapping("/saveUser")
-    public ModelAndView saveUserData(@ModelAttribute("user") User user, BindingResult result) {
-        System.out.println(user);
+    public String saveUserData(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return new ModelAndView("redirect:/userList.html");
+        return "user-list";
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public ModelAndView deleteUserDataPost(@ModelAttribute("user") User user, BindingResult result) {
+    public String deleteUserDataPost(@ModelAttribute("user") User user) {
         try {
             userService.removeUserById(user.getId());
         } catch (NotFoundException nfe) {
             System.out.println(nfe.getLocalizedMessage());
         }
-        return new ModelAndView("redirect:/userList.html");
+        return "user-list";
     }
 
     @RequestMapping("/userList")
-    public ModelAndView getUserList() {
-        Map<String, Object> model = new HashMap<String, Object>();
+    public String getUserList(ModelMap model) {
         List<User> users = userService.findAllUsers();
         model.put("user", users);
-        return new ModelAndView("user-details", model);
+        return "user-list";
     }
 
     @RequestMapping("/admin")
-    public ModelAndView loadAdminPage() {
-        Map<String, Object> model = new HashMap<String, Object>();
-        return new ModelAndView("admin-page", "model", model);
+    public String loadAdminPage() {
+        return "tiles/admin/admin-page";
     }
 }
