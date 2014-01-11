@@ -4,7 +4,7 @@
     <%--create an issue section--%>
     <H1>Create an Issue</H1>
 
-    <c:url var="createIssue" value="/trustt/issue"/>
+    <c:url var="createIssue" value="/trustt/create-issue"/>
     <form:form id="issueForm" class="form-signin" method="post" commandName="issue"
                action="${createIssue}">
 
