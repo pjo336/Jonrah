@@ -5,7 +5,6 @@
             <li class="navbar-brand"><a style="color: teal;" href="/">JONRAH</a></li>
             <li class="navbar-brand rightbar" style="padding-left: 400px;"><a style="color: teal;" href="/register">Register</a></li>
             <li class="navbar-brand rightbar"><a style="color: teal;" href="/userList">User List</a></li>
-            <li class="navbar-brand rightbar"><a style="color: teal;" href="/bootstrap-test">Bootstrap</a></li>
             <li class="navbar-brand rightbar"><a style="color: teal;" href="#">About</a></li>
             <li class="navbar-brand rightbar"><a style="color: teal;" href="/trustt">Trustt</a></li>
             <li class="navbar-brand rightbar"><a style="color: teal;" href="/admin">Admin</a></li>
