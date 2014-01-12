@@ -110,9 +110,20 @@ public class TrusttController {
                 return o2.getDateAdded().compareTo(o1.getDateAdded());
             }
         });
+        // TODO do this in service
+        List<Issue> openIssues = new ArrayList<Issue>();
+        List<Issue> closedIssues = new ArrayList<Issue>();
+        for(Issue issue: issues) {
+            if(issue.getStatus().getIssueStatusName().equalsIgnoreCase("Open")) {
+                openIssues.add(issue);
+            } else {
+                closedIssues.add(issue);
+            }
+        }
 
         // Add the issue on the model.
-        model.put("issues", issues);
+        model.put("openIssues", openIssues);
+        model.put("closedIssues", closedIssues);
 
         return "trustt-issue-list";
     }
