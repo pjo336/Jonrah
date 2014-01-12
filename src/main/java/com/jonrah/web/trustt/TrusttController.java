@@ -104,14 +104,13 @@ public class TrusttController {
     public String serveAllIssues(ModelMap model) throws NotFoundException {
 
         List<Issue> issues = issueService.findAllIssues();
+        // Sort the issues by Date Added ascending
         Collections.sort(issues, new Comparator<Issue>() {
             public int compare(Issue o1, Issue o2) {
                 return o2.getDateAdded().compareTo(o1.getDateAdded());
             }
         });
-        for(Issue blah: issues) {
-            System.out.println(blah);
-        }
+
         // Add the issue on the model.
         model.put("issues", issues);
 

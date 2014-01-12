@@ -3,6 +3,14 @@
 <div class="container">
 
     <%--table of bugs--%>
+    <div class="tabbable">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#pane1" data-toggle="tab">Open Issues</a>
+            </li>
+            <li>
+                <a href="#pane1" data-toggle="tab">Closed Issues</a>
+            </li>
+        </ul>
     <div class="span7">
         <div class="widget stacked widget-table action-table">
 
@@ -109,7 +117,7 @@
         </div>
         <!-- /widget -->
     </div>
-
+    </div>
     <%--full bug list--%>
     <%--<div style="color: teal; font-size: 30px">Jonrah | Trustt</div>--%>
     <%--<br/>--%>
