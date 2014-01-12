@@ -3,4 +3,5 @@
 <div class="container">
     <h1>TRUSTT SON</h1>
     <a href="/trustt/create-issue"><button type="button" class="btn btn-primary btn-lg">Create an Issue</button></a>
+    <a href="/trustt/issues"><button type="button" class="btn btn-info btn-lg">View All Issues</button></a>
 </div>
