@@ -11,7 +11,9 @@
         <put-attribute name="top-navbar" value="/WEB-INF/view/tiles/common/top-navbar.jsp" />
         <!-- header -->
         <!-- body -->
+        <!-- custom-styles -->
         <put-attribute name="footer" value="/WEB-INF/view/tiles/common/footer.jsp" />
+        <!-- custom-scripts -->
     </definition>
 
     <!-- Views -->
@@ -46,6 +48,8 @@
     <definition name="trustt-issue-detail" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | Issue Detail" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-detail.jsp" />
+        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-detail-styles.jsp" />
+        <put-attribute name="custom-scripts" value="/WEB-INF/view/tiles/trustt/issue-detail-scripts.jsp" />
     </definition>
 
     <definition name="trustt-issue-list" extends="jonrah.common">

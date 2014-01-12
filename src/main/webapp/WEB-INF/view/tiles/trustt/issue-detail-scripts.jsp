@@ -1,0 +1,1 @@
+<script type="text/javascript" src="/static/js/trustt/issueDetail.js"></script>

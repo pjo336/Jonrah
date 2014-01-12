@@ -1,0 +1,1 @@
+<link rel="stylesheet/less" type="text/css" href="/static/styles/trustt/issue-detail.less"/>

@@ -11,16 +11,16 @@
         <table width="600px" height="350px">
             <tr>
                 <td><form:label path="title">Title</form:label></td>
-                <td><form:input path="title"/></td>
+                <td><form:input type="text" path="title"/></td>
             </tr>
 
             <tr>
                 <td><form:label path="description">Description</form:label></td>
-                <td><form:input path="description"/></td>
+                <td><form:textarea path="description" rows="5" cols="50"/></td>
             </tr>
 
             <tr>
-                <td><form:label path="type">Description</form:label></td>
+                <td><form:label path="type">Type</form:label></td>
                 <td><form:select path="type" items="${types}" /></td>
             </tr>
 

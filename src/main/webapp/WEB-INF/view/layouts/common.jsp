@@ -12,6 +12,8 @@
 <tiles:insertAttribute name="top-navbar" />
 <tiles:insertAttribute name="header" defaultValue=""/>
 <tiles:insertAttribute name="body" />
+<tiles:insertAttribute name="custom-styles " defaultValue=""/>
 <tiles:insertAttribute name="footer" />
+<tiles:insertAttribute name="custom-scripts" defaultValue=""/>
 </body>
 </html>

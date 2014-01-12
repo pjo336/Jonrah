@@ -71,6 +71,6 @@ public class IndexController {
 
     @RequestMapping("/admin")
     public String loadAdminPage() {
-        return "tiles/admin/admin-page";
+        return "admin-page";
     }
 }
