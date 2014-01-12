@@ -4,24 +4,20 @@ import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.trustt.type.service.IssueTypeService;
-import com.jonrah.user.User;
 import com.jonrah.web.trustt.forms.IssueForm;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by pjo336 on 12/26/13
@@ -108,6 +104,14 @@ public class TrusttController {
     public String serveAllIssues(ModelMap model) throws NotFoundException {
 
         List<Issue> issues = issueService.findAllIssues();
+        Collections.sort(issues, new Comparator<Issue>() {
+            public int compare(Issue o1, Issue o2) {
+                return o2.getDateAdded().compareTo(o1.getDateAdded());
+            }
+        });
+        for(Issue blah: issues) {
+            System.out.println(blah);
+        }
         // Add the issue on the model.
         model.put("issues", issues);
 

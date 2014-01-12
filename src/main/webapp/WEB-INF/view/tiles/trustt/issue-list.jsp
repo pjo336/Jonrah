@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="container">
 
     <%--table of bugs--%>
@@ -14,25 +16,85 @@
             <div class="widget-content">
                 <c:if test="${!empty issues}">
                     <table class="table table-striped table-bordered">
-                        <thead>
+                        <thead class="issue-table-header">
                         <tr>
-                            <th>Date</th>
+                            <th>Opened Date</th>
                             <th>Title</th>
-                            <th class="td-actions"></th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Assigned To</th>
+                            <th class="td-actions">Open Issue</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="issue-table">
                         <c:forEach items="${issues}" var="issue">
-                            <tr>
-                                <td><c:out value="${issue.dateAdded}"/></td>
-                                <td><c:out value="${issue.title}"/></td>
-                                <td class="td-actions">
-                                    <a href="javascript:;" class="btn btn-small btn-primary">
-                                        <i class="btn-icon-only icon-ok"></i>
-                                    </a>
+                            <tr ondblclick="document.location = '/trustt/issue/${issue.id}';">
 
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="btn-icon-only icon-remove"></i>
+                                <td><fmt:formatDate value="${issue.dateAdded}" pattern="MM-dd-yyyy" /></td>
+                                <td class="issue-title-table"><c:out value="${issue.title}"/></td>
+                                <%--issue priority--%>
+                                <c:choose>
+                                    <c:when test="${empty issue.priority}">
+                                        <td class="td-actions">
+                                            <a href="javascript:;" class="btn btn-small btn-primary">
+                                                <i class="btn-icon-only icon-ok"></i>
+                                                Set Priority
+                                            </a>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${!empty issue.priority}">
+                                        <td>
+                                            <c:out value="${issue.priority}"/>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                                <%--end issue priority--%>
+
+                                <td><c:out value="${issue.status}"/></td>
+
+                                <%--issue type--%>
+                                <c:choose>
+                                    <c:when test="${empty issue.type}">
+                                        <td class="td-actions">
+                                            <a href="javascript:;" class="btn btn-small btn-primary">
+                                                <i class="btn-icon-only icon-ok"></i>
+                                                Set Type
+                                            </a>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${!empty issue.type}">
+                                        <td>
+                                            <c:out value="${issue.type}"/>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                                <%--end issue type--%>
+
+                                <%--issue assigned to--%>
+                                <c:choose>
+                                    <c:when test="${empty issue.assignedToId}">
+                                        <td class="td-actions">
+                                            <a href="javascript:;" class="btn btn-small btn-primary">
+                                                <i class="btn-icon-only icon-ok"></i>
+                                                Assign
+                                            </a>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${!empty issue.assignedToId}">
+                                        <td>
+                                            <a href="/userList">
+                                            <c:out value="${issue.assignedToId.firstName} ${issue.assignedToId.lastName}"/>
+                                            </a>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                                <%--end issue assigned to--%>
+
+                                <td class="td-actions">
+                                    <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-primary">
+                                        <i class="btn-icon-only icon-ok"></i>
+                                        Open Issue
                                     </a>
                                 </td>
                             </tr>
@@ -49,37 +111,37 @@
     </div>
 
     <%--full bug list--%>
-    <div style="color: teal; font-size: 30px">Jonrah | Trustt</div>
-    <br/>
-    <c:if test="${!empty issues}">
-        <table border="1" bgcolor="black" width="700px">
-            <tr
-                    style="background-color: teal; color: white; text-align: center;"
-                    height="40px">
-                <td>Issue Number</td>
-                <td>Title</td>
-                <td>Type</td>
-                <td>Status</td>
-                <td>Priority</td>
-                <td>Created By</td>
-                <td>Assigned To</td>
-                <td>Created On</td>
-            </tr>
+    <%--<div style="color: teal; font-size: 30px">Jonrah | Trustt</div>--%>
+    <%--<br/>--%>
+    <%--<c:if test="${!empty issues}">--%>
+        <%--<table border="1" bgcolor="black" width="700px">--%>
+            <%--<tr--%>
+                    <%--style="background-color: teal; color: white; text-align: center;"--%>
+                    <%--height="40px">--%>
+                <%--<td>Issue Number</td>--%>
+                <%--<td>Title</td>--%>
+                <%--<td>Type</td>--%>
+                <%--<td>Status</td>--%>
+                <%--<td>Priority</td>--%>
+                <%--<td>Created By</td>--%>
+                <%--<td>Assigned To</td>--%>
+                <%--<td>Created On</td>--%>
+            <%--</tr>--%>
 
-            <c:forEach items="${issues}" var="issue">
-                <tr
-                        style="background-color: white; color: black; text-align: center;"
-                        height="30px">
-                    <td><c:out value="${issue.id}"/></td>
-                    <td><c:out value="${issue.title}"/></td>
-                    <td><c:out value="${issue.type}"/></td>
-                    <td><c:out value="${issue.status}"/></td>
-                    <td><c:out value="${issue.priority}"/></td>
-                    <td><c:out value="${issue.createdById.userName}"/></td>
-                    <td><c:out value="${issue.assignedToId.userName}"/></td>
-                    <td><c:out value="${issue.dateAdded}"/></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
+            <%--<c:forEach items="${issues}" var="issue">--%>
+                <%--<tr--%>
+                        <%--style="background-color: white; color: black; text-align: center;"--%>
+                        <%--height="30px">--%>
+                    <%--<td><c:out value="${issue.id}"/></td>--%>
+                    <%--<td><c:out value="${issue.title}"/></td>--%>
+                    <%--<td><c:out value="${issue.type}"/></td>--%>
+                    <%--<td><c:out value="${issue.status}"/></td>--%>
+                    <%--<td><c:out value="${issue.priority}"/></td>--%>
+                    <%--<td><c:out value="${issue.createdById.userName}"/></td>--%>
+                    <%--<td><c:out value="${issue.assignedToId.userName}"/></td>--%>
+                    <%--<td><c:out value="${issue.dateAdded}"/></td>--%>
+                <%--</tr>--%>
+            <%--</c:forEach>--%>
+        <%--</table>--%>
+    <%--</c:if>--%>
 </div>
