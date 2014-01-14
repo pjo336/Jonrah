@@ -4,7 +4,6 @@ import com.jonrah.entity.JonrahEntity;
 import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.milestone.Milestone;
 import com.jonrah.trustt.type.IssueType;
-import com.jonrah.trustt.type.IssueTypes;
 import com.jonrah.user.User;
 
 import javax.persistence.*;

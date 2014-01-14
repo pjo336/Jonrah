@@ -22,8 +22,12 @@ public class IssueType implements JonrahEntity {
         this.name = name;
     }
 
+    public IssueType(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private long id;
 
@@ -57,8 +61,8 @@ public class IssueType implements JonrahEntity {
         return name;
     }
 
-    public void setName(IssueTypes name) {
-        this.name = name.getIssueTypeName();
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDateAdded() {

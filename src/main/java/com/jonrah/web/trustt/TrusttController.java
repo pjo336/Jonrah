@@ -2,7 +2,7 @@ package com.jonrah.web.trustt;
 
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
-import com.jonrah.trustt.type.IssueTypes;
+import com.jonrah.trustt.type.IssueType;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.web.trustt.forms.IssueForm;
 import javassist.NotFoundException;
@@ -42,14 +42,15 @@ public class TrusttController {
         List<Issue> issues = issueService.findAllIssues();
 
         // List all the possible IssueTypes
-        List<String> typeNames = new ArrayList<String>();
-        for(IssueTypes type: IssueTypes.values()) {
-            typeNames.add(type.name());
+        List<IssueType> types = issueTypeService.findAllIssueTypes();
+        List<String> issueTypeNames = new ArrayList<String>();
+        for(IssueType type: types) {
+            issueTypeNames.add(type.getName());
         }
 
         // Put the issues and the possible types on the model
         model.put("issues", issues);
-        model.put("types", typeNames);
+        model.put("types", issueTypeNames);
         return "trustt-homepage";
     }
 
@@ -60,13 +61,14 @@ public class TrusttController {
     public String serveIssueForm(@ModelAttribute("issue") IssueForm issueForm, ModelMap model) {
 
         // List all the possible IssueTypes
-        List<String> typeNames = new ArrayList<String>();
-        for(IssueTypes type: IssueTypes.values()) {
-            typeNames.add(type.name());
+        List<IssueType> types = issueTypeService.findAllIssueTypes();
+        List<String> issueTypeNames = new ArrayList<String>();
+        for(IssueType type: types) {
+            issueTypeNames.add(type.getName());
         }
 
         // Add the type names on the model
-        model.put("types", typeNames);
+        model.put("types", issueTypeNames);
 
         return "trustt-create-issue";
     }
@@ -98,7 +100,7 @@ public class TrusttController {
     }
 
     /**
-     * Display the details of a single issue.
+     * Display the details of all issues.
      */
     @RequestMapping(value = "/trustt/issues", method = RequestMethod.GET)
     public String serveAllIssues(ModelMap model) throws NotFoundException {
