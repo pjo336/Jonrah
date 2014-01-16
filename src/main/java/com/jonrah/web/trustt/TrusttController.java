@@ -1,9 +1,13 @@
 package com.jonrah.web.trustt;
 
+import com.google.gson.Gson;
+import com.jonrah.trustt.comment.IssueComment;
+import com.jonrah.trustt.comment.service.IssueCommentService;
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueType;
 import com.jonrah.trustt.type.service.IssueTypeService;
+import com.jonrah.user.service.UserService;
 import com.jonrah.web.trustt.forms.IssueForm;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponseWrapper;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,9 +34,13 @@ import java.util.List;
 public class TrusttController {
 
     @Autowired
+    IssueCommentService issueCommentService;
+    @Autowired
     IssueService issueService;
     @Autowired
     IssueTypeService issueTypeService;
+    @Autowired
+    UserService userService;
 
     /**
      * Welcome page
@@ -100,6 +110,22 @@ public class TrusttController {
     }
 
     /**
+     * Submit a comment to a single issue
+     */
+    @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.POST)
+    public String submitCommentSingleIssue(@PathVariable long issueId, ModelMap model) throws NotFoundException {
+        IssueComment issueComment = new IssueComment();
+        issueComment.setBugId(issueService.restoreIssueById(issueId));
+        // TODO remove hardcoding
+        issueComment.setComment("Herp derp");
+        issueComment.setCommenter(userService.restoreUserById(1));
+        issueCommentService.addComment(issueComment);
+
+
+        return "redirect:/trustt/issue/" + issueId;
+    }
+
+    /**
      * Display the details of all issues.
      */
     @RequestMapping(value = "/trustt/issues", method = RequestMethod.GET)
@@ -128,5 +154,25 @@ public class TrusttController {
         model.put("closedIssues", closedIssues);
 
         return "trustt-issue-list";
+    }
+
+    // TODO pass the issue id and user name into this method
+    @RequestMapping(value = "/trustt/updateAssignedUser", method = RequestMethod.POST)
+    public void assignUser(ModelMap model, HttpServletResponseWrapper result) {
+        System.out.println("Hello");
+        model.put("isValid", true);
+        model.put("username", "SWING");
+        try {
+            write(result, model);
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    private void write(HttpServletResponseWrapper result, ModelMap model) throws IOException{
+        result.setContentType("application/json");
+        result.setCharacterEncoding("UTF-8");
+        System.out.println(new Gson().toJson(model));
+        result.getWriter().write(new Gson().toJson(model));
     }
 }

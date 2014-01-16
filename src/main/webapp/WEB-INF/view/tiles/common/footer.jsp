@@ -17,3 +17,4 @@
 <script type="text/javascript" src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
 <%-- Custom Scripts --%>
 <script type="text/javascript" src="/static/js/navbar.js"></script>
+<script type="text/javascript" src="/static/js/trustt/issue/updateIssueList.js"></script>

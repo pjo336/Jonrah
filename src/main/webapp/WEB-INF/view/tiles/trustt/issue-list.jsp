@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
 
     <%--table of bugs--%>
@@ -83,11 +84,11 @@
                                 <%--issue assigned to--%>
                                 <c:choose>
                                     <c:when test="${empty issue.assignedToId}">
-                                        <td class="td-actions">
-                                            <a href="javascript:;" class="btn btn-small btn-primary">
-                                                <i class="btn-icon-only icon-ok"></i>
-                                                Assign
-                                            </a>
+                                        <td id="assignedUser-${issue.id}" class="td-actions">
+                                            <form:form id="assignUsers" method="post">
+                                            <input type="hidden" id="assignedUserIssueId" value="${issue.id}"/>
+                                            <input type="submit" class="btn btn-small btn-primary" value="Assign"/>
+                                            </form:form>
                                         </td>
                                     </c:when>
                                     <c:when test="${!empty issue.assignedToId}">
