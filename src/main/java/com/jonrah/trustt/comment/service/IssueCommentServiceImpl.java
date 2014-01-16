@@ -28,6 +28,12 @@ public class IssueCommentServiceImpl implements IssueCommentService {
     }
 
     @Override
+    public List<IssueComment> findAllCommentsForIssue(long issueId) {
+        Criteria crit = issueCommentDao.createCrit(new IssueComment());
+        crit.add(Restrictions.eq("bug.id", issueId));
+        return issueCommentDao.findCritList(crit);
+    }
+    @Override
     public List<IssueComment> findAllCommentsByUser(long userId) {
         Criteria crit = issueCommentDao.createCrit(new IssueComment());
         crit.add(Restrictions.eq("commenter.id", userId));

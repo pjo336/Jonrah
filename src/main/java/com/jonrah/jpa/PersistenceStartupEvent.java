@@ -18,6 +18,9 @@ import java.util.Properties;
 /**
  * Created by Peter Johnston on 1/11/14
  * Jonrah
+ */
+
+/*
  * PersistenceStartupEvent performs neccessary actions on the startup of the application.
  * This includes ensuring the admin account exists and the issue types.
  */

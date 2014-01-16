@@ -7,7 +7,9 @@ import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueType;
 import com.jonrah.trustt.type.service.IssueTypeService;
+import com.jonrah.user.User;
 import com.jonrah.user.service.UserService;
+import com.jonrah.util.SecurityUtils;
 import com.jonrah.web.trustt.forms.IssueForm;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +103,11 @@ public class TrusttController {
      */
     @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.GET)
     public String serveSingleIssue(@PathVariable long issueId, ModelMap model) throws NotFoundException {
-
         Issue issue = issueService.restoreIssueById(issueId);
-        // Add the issue on the model.
+        List<IssueComment> comments = issueCommentService.findAllCommentsForIssue(issueId);
+        // Add the issue and comments on the model.
         model.put("issue", issue);
-
+        model.put("comments", comments);
         return "trustt-issue-detail";
     }
 
@@ -113,14 +115,18 @@ public class TrusttController {
      * Submit a comment to a single issue
      */
     @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.POST)
-    public String submitCommentSingleIssue(@PathVariable long issueId, ModelMap model) throws NotFoundException {
-        IssueComment issueComment = new IssueComment();
-        issueComment.setBugId(issueService.restoreIssueById(issueId));
-        // TODO remove hardcoding
-        issueComment.setComment("Herp derp");
-        issueComment.setCommenter(userService.restoreUserById(1));
-        issueCommentService.addComment(issueComment);
+    public String submitCommentSingleIssue(@PathVariable long issueId, @ModelAttribute IssueComment comment, ModelMap model) throws NotFoundException {
+        // Get the user making the comment
+        User userCommenting = userService.findUserByLogin(SecurityUtils.getCurrentUserName()).get(0);
 
+        // Create and populate the comment
+        IssueComment issueComment = new IssueComment();
+        issueComment.setCommenter(userCommenting);
+        issueComment.setBugId(issueService.restoreIssueById(issueId));
+        issueComment.setComment(comment.getComment());
+
+        // Add the comment to the database
+        issueCommentService.addComment(issueComment);
 
         return "redirect:/trustt/issue/" + issueId;
     }
