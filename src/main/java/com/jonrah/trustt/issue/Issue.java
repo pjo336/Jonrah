@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by pjo336 on 12/23/13
- * biggertime
+ * Created by Peter Johnston on 12/23/13
+ * Jonrah
  */
 
 @Entity

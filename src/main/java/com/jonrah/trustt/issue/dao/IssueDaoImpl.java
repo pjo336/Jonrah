@@ -5,8 +5,8 @@ import com.jonrah.trustt.issue.Issue;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by pjo336 on 12/27/13
- * biggertime
+ * Created by Peter Johnston on 12/27/13
+ * Jonrah
  */
 
 @Component

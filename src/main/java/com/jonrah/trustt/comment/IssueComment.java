@@ -7,8 +7,8 @@ import com.jonrah.user.User;
 import javax.persistence.*;
 
 /**
- * Created by pjo336 on 12/26/13
- * biggertime
+ * Created by Peter Johnston on 12/26/13
+ * Jonrah
  */
 
 @Entity

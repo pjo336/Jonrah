@@ -10,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Created by pjo336 on 12/21/13
- * biggertime
+ * Created by Peter Johnston on 12/21/13
+ * Jonrah
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/com/jonrah/applicationContext.xml"})

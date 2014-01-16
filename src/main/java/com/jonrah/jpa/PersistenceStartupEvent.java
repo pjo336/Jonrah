@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by pjo336 on 1/11/14
+ * Created by Peter Johnston on 1/11/14
  * Jonrah
  * PersistenceStartupEvent performs neccessary actions on the startup of the application.
  * This includes ensuring the admin account exists and the issue types.
@@ -34,7 +34,7 @@ public class PersistenceStartupEvent implements ApplicationListener<ContextRefre
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent ) {
         // Make sure the admin user exists
         if(userService.findUserByLogin("admin").size() == 0 ) {
-            User admin = new User("admin", "password", "", "", UserGender.MALE, "admin@biggertime.com", UserType.ADMIN);
+            User admin = new User("admin", "password", "", "", UserGender.MALE, "admin@jonrah.com", UserType.ADMIN);
             userService.addUser(admin);
         }
 

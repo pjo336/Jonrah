@@ -1,15 +1,14 @@
 package com.jonrah.web;
 
 /**
- * Created by pjo336 on 12/21/13
- * biggertime
+ * Created by Peter Johnston on 12/21/13
+ * Jonrah
  */
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.security.Principal;
 
 @Controller
 public class LoginController {

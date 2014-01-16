@@ -6,8 +6,8 @@ import javassist.NotFoundException;
 import java.util.List;
 
 /**
- * Created by pjo336 on 12/28/13
- * biggertime
+ * Created by Peter Johnston on 12/28/13
+ * Jonrah
  */
 public interface IssueService {
 

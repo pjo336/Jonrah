@@ -3,7 +3,6 @@ package com.jonrah.trustt.issue.service;
 import com.jonrah.trustt.issue.Issue;
 import com.jonrah.trustt.issue.IssueStatus;
 import com.jonrah.trustt.issue.dao.IssueDao;
-import com.jonrah.trustt.type.IssueType;
 import com.jonrah.trustt.type.service.IssueTypeService;
 import com.jonrah.user.User;
 import com.jonrah.user.service.UserService;
@@ -19,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by pjo336 on 12/28/13
- * biggertime
+ * Created by Peter Johnston on 12/28/13
+ * Jonrah
  */
 
 @Service
