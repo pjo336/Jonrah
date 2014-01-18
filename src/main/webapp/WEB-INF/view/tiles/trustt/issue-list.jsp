@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody class="issue-table">
-                        <c:forEach items="${openIssues}" var="issue" varStatus="theCount">
+                        <c:forEach items="${openIssues}" var="issue">
                             <tr ondblclick="document.location = '/trustt/issue/${issue.id}';">
 
                                 <td><fmt:formatDate value="${issue.dateAdded}" pattern="MM-dd-yyyy" /></td>
@@ -103,7 +103,7 @@
                                 <%--end issue assigned to--%>
 
                                 <td class="td-actions">
-                                    <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-primary">
+                                    <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-info">
                                         <i class="btn-icon-only icon-ok"></i>
                                         Open Issue
                                     </a>
@@ -222,46 +222,8 @@
                     </c:if>
 
                 </div>
-                <!-- /widget-content -->
-
             </div>
         </div>
-            <!-- /widget -->
         </div>
-
     </div>
-    <%--full bug list--%>
-    <%--<div style="color: teal; font-size: 30px">Jonrah | Trustt</div>--%>
-    <%--<br/>--%>
-    <%--<c:if test="${!empty issues}">--%>
-        <%--<table border="1" bgcolor="black" width="700px">--%>
-            <%--<tr--%>
-                    <%--style="background-color: teal; color: white; text-align: center;"--%>
-                    <%--height="40px">--%>
-                <%--<td>Issue Number</td>--%>
-                <%--<td>Title</td>--%>
-                <%--<td>Type</td>--%>
-                <%--<td>Status</td>--%>
-                <%--<td>Priority</td>--%>
-                <%--<td>Created By</td>--%>
-                <%--<td>Assigned To</td>--%>
-                <%--<td>Created On</td>--%>
-            <%--</tr>--%>
-
-            <%--<c:forEach items="${issues}" var="issue">--%>
-                <%--<tr--%>
-                        <%--style="background-color: white; color: black; text-align: center;"--%>
-                        <%--height="30px">--%>
-                    <%--<td><c:out value="${issue.id}"/></td>--%>
-                    <%--<td><c:out value="${issue.title}"/></td>--%>
-                    <%--<td><c:out value="${issue.type}"/></td>--%>
-                    <%--<td><c:out value="${issue.status}"/></td>--%>
-                    <%--<td><c:out value="${issue.priority}"/></td>--%>
-                    <%--<td><c:out value="${issue.createdById.userName}"/></td>--%>
-                    <%--<td><c:out value="${issue.assignedToId.userName}"/></td>--%>
-                    <%--<td><c:out value="${issue.dateAdded}"/></td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-        <%--</table>--%>
-    <%--</c:if>--%>
 </div>

@@ -15,6 +15,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -104,5 +106,20 @@ public class IssueServiceImpl implements IssueService {
         Criteria crit = issueDao.createCrit(new Issue());
         crit.add(Restrictions.eq("status", IssueStatus.CLOSED.value()));
         return issueDao.findCritList(crit);
+    }
+
+    @Override
+    public List<Issue> sortIssueListByDate(boolean ascending, List<Issue> listToSort) {
+        final boolean direction = ascending;
+        Collections.sort(listToSort, new Comparator<Issue>() {
+            public int compare(Issue o1, Issue o2) {
+                if(direction) {
+                    return o1.getDateAdded().compareTo(o2.getDateAdded());
+                } else {
+                    return o2.getDateAdded().compareTo(o1.getDateAdded());
+                }
+            }
+        });
+        return listToSort;
     }
 }

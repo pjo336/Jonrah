@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Peter Johnston on 12/26/13
@@ -133,17 +135,14 @@ public class TrusttController {
      */
     @RequestMapping(value = "/trustt/issues", method = RequestMethod.GET)
     public String serveAllIssues(ModelMap model) throws NotFoundException {
+        boolean descending = false;
 
-        List<Issue> issues = issueService.findAllIssues();
-        // Sort the issues by Date Added ascending
-        Collections.sort(issues, new Comparator<Issue>() {
-            public int compare(Issue o1, Issue o2) {
-                return o2.getDateAdded().compareTo(o1.getDateAdded());
-            }
-        });
-        // TODO The service methods here arent working properly
         List<Issue> openIssues = issueService.findAllOpenIssues();
         List<Issue> closedIssues = issueService.findAllClosedIssues();
+
+        // Sort the issues in descending order
+        openIssues = issueService.sortIssueListByDate(descending, openIssues);
+        closedIssues = issueService.sortIssueListByDate(descending, closedIssues);
 
         // Add the issue on the model.
         model.put("openIssues", openIssues);

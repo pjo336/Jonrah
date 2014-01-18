@@ -72,4 +72,12 @@ public interface IssueService {
      * @return
      */
     public List<Issue> findAllClosedIssues();
+
+    /**
+     * Sort the given list by date_added field
+     * @param ascending true means sort in ascending order
+     * @param listToSort What issues need to be sorted
+     * @return a new, now sorted list
+     */
+    public List<Issue> sortIssueListByDate(boolean ascending, List<Issue> listToSort);
 }
