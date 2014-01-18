@@ -91,4 +91,18 @@ public class IssueServiceImpl implements IssueService {
         crit.add(Restrictions.eq("assignedToId.id", userId));
         return issueDao.findCritList(crit);
     }
+
+    @Override
+    public List<Issue> findAllOpenIssues() {
+        Criteria crit = issueDao.createCrit(new Issue());
+        crit.add(Restrictions.ne("status", IssueStatus.CLOSED.value()));
+        return issueDao.findCritList(crit);
+    }
+
+    @Override
+    public List<Issue> findAllClosedIssues() {
+        Criteria crit = issueDao.createCrit(new Issue());
+        crit.add(Restrictions.eq("status", IssueStatus.CLOSED.value()));
+        return issueDao.findCritList(crit);
+    }
 }

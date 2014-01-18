@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Peter Johnston on 12/26/13
@@ -144,16 +141,9 @@ public class TrusttController {
                 return o2.getDateAdded().compareTo(o1.getDateAdded());
             }
         });
-        // TODO do this in service
-        List<Issue> openIssues = new ArrayList<Issue>();
-        List<Issue> closedIssues = new ArrayList<Issue>();
-        for(Issue issue: issues) {
-            if(issue.getStatus().getIssueStatusName().equalsIgnoreCase("Open")) {
-                openIssues.add(issue);
-            } else {
-                closedIssues.add(issue);
-            }
-        }
+        // TODO The service methods here arent working properly
+        List<Issue> openIssues = issueService.findAllOpenIssues();
+        List<Issue> closedIssues = issueService.findAllClosedIssues();
 
         // Add the issue on the model.
         model.put("openIssues", openIssues);
@@ -162,12 +152,12 @@ public class TrusttController {
         return "trustt-issue-list";
     }
 
-    // TODO pass the issue id and user name into this method
+    // TODO fix this to say the user instead of SWING
     @RequestMapping(value = "/trustt/updateAssignedUser", method = RequestMethod.POST)
     public void assignUser(ModelMap model, HttpServletResponseWrapper result) {
-        System.out.println("Hello");
+        System.out.println("Assigned user button clicked");
         model.put("isValid", true);
-        model.put("username", "SWING");
+        model.put("username", UUID.randomUUID().toString());
         try {
             write(result, model);
         } catch(IOException ioe) {
@@ -178,7 +168,12 @@ public class TrusttController {
     private void write(HttpServletResponseWrapper result, ModelMap model) throws IOException{
         result.setContentType("application/json");
         result.setCharacterEncoding("UTF-8");
-        System.out.println(new Gson().toJson(model));
         result.getWriter().write(new Gson().toJson(model));
+    }
+
+    @RequestMapping(value = "/trustt/searchit", method = RequestMethod.GET)
+    public String serveAutoCompleteUsers(ModelMap model) throws NotFoundException {
+        System.out.println("Searching...");
+        return "";
     }
 }

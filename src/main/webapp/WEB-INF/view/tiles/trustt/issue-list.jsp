@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody class="issue-table">
-                        <c:forEach items="${openIssues}" var="issue">
+                        <c:forEach items="${openIssues}" var="issue" varStatus="theCount">
                             <tr ondblclick="document.location = '/trustt/issue/${issue.id}';">
 
                                 <td><fmt:formatDate value="${issue.dateAdded}" pattern="MM-dd-yyyy" /></td>
@@ -80,14 +80,15 @@
                                     </c:when>
                                 </c:choose>
                                 <%--end issue type--%>
-
                                 <%--issue assigned to--%>
                                 <c:choose>
                                     <c:when test="${empty issue.assignedToId}">
                                         <td id="assignedUser-${issue.id}" class="td-actions">
-                                            <form:form id="assignUsers" method="post">
-                                            <input type="hidden" id="assignedUserIssueId" value="${issue.id}"/>
-                                            <input type="submit" class="btn btn-small btn-primary" value="Assign"/>
+                                            <form:form id="assignUsersForm-${issue.id}" method="post">
+                                                <button id="${issue.id}" class="assignUsersButtonMain btn btn-small btn-primary">Assign</button>
+                                                <%--Hidden text field and submit button--%>
+                                                <input id="inputAssignedUserName-${issue.id}" class="inputAssignedUserName" type="text" width="75px"/>
+                                                <button id="inputAssignedUserNameButton-${issue.id}" class="inputAssignedUserName glyphicon glyphicon-ok-sign"/>
                                             </form:form>
                                         </td>
                                     </c:when>

@@ -6,4 +6,10 @@ package com.jonrah.entity;
  */
 public interface JonrahEntity {
 
+    /**
+     * Returns a String correlating to the Entities stored table name
+     * @return String table name
+     */
+    //public String getTableName();
+
 }

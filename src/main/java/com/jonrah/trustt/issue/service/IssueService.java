@@ -60,4 +60,16 @@ public interface IssueService {
      * @return
      */
     public List<Issue> findIssuesAssignedToUser(long userId);
+
+    /**
+     * Find all issues that do not have a status of closed
+     * @return
+     */
+    public List<Issue> findAllOpenIssues();
+
+    /**
+     * Find all issues that have a status of closed
+     * @return
+     */
+    public List<Issue> findAllClosedIssues();
 }
