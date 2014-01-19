@@ -47,14 +47,14 @@
 
     <definition name="trustt-issue-detail" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | Issue Detail" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-detail.jsp" />
-        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-detail-styles.jsp" />
-        <put-attribute name="custom-scripts" value="/WEB-INF/view/tiles/trustt/issue-detail-scripts.jsp" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail.jsp" />
+        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail-styles.jsp" />
+        <put-attribute name="custom-scripts" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail-scripts.jsp" />
     </definition>
 
     <definition name="trustt-issue-list" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | All Issues" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-list.jsp" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list.jsp" />
     </definition>
 
     <definition name="trustt-create-issue" extends="jonrah.common">
@@ -65,7 +65,7 @@
     <!-- ADMIN -->
 
     <definition name="admin-page" extends="jonrah.common">
-        <put-attribute name="title" value="Jonrah | SECURELOLOLOL" />
+        <put-attribute name="title" value="Jonrah | Admin" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/admin/admin-page.jsp" />
     </definition>
 

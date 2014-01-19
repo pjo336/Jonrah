@@ -34,26 +34,6 @@ $(document).ready(function(){
             inputNameButton.hide();
         });
 
-//        inputNameField.keydown(function(e) {
-//            if (e.keyCode == 13) {
-//                form.submit(function() {
-//                    $.ajax({
-//                        url: 'updateAssignedUser',
-//                        type: 'POST',
-//                        dataType: 'json',
-//                        data: form,
-//                        success: function(data){
-//                            if(data.isValid) {
-//                                updatedDisplayedAssignedUser.html(data.username);
-//                            } else {
-//                                alert('Please enter a registered Jonrah user');
-//                            }
-//                        }
-//                    })
-//                })
-//            }
-//        });
-
         inputNameButton.click(function() {
             form.submit(function() {
                 $.ajax({
