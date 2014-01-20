@@ -8,11 +8,12 @@
 </div>
 
 <%-- Something weird copy and pasted by Peter --%>
-<script type="text/javascript" src="/static/lib/bootstrap/js/holder.js"></script>
+
 <%-- Less --%>
 <script type="text/javascript" src="/static/lib/less/less.js"></script>
 <%-- jQuery --%>
 <script type="text/javascript" src="/static/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/static/lib/jquery/jquery-ui-1.10.4.custom.min.js"></script>
 <%-- Bootstrap --%>
 <script type="text/javascript" src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
 <%-- Custom Scripts --%>

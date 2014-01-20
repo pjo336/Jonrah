@@ -6,6 +6,7 @@ import com.jonrah.user.User;
 import com.jonrah.user.UserGender;
 import com.jonrah.user.UserType;
 import com.jonrah.user.service.UserService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -36,11 +37,16 @@ public class PersistenceStartupEvent implements ApplicationListener<ContextRefre
 
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent ) {
         // Make sure the admin user exists
-        if(userService.findUserByLogin("admin").size() == 0 ) {
+        User user = null;
+        try {
+            user = userService.restoreUserByLogin("admin");
+        } catch(NotFoundException nfe) {
+            nfe.printStackTrace();
+        }
+        if(user == null ) {
             User admin = new User("admin", "password", "", "", UserGender.MALE, "admin@jonrah.com", UserType.ADMIN);
             userService.addUser(admin);
         }
-
         // TODO validate this
         // Ensure all issueTypes are added to the database
         InputStream in = getClass().getClassLoader().getResourceAsStream("issuetypes.properties");

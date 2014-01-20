@@ -46,9 +46,13 @@ public class IssueServiceImpl implements IssueService {
         if(name.equals("anonymousUser")) {
             throw new AccessDeniedException("This user is not logged in and cannot create an issue");
         } else {
-            User user = userService.findUserByLogin(name).get(0);
-            issue.setCreatedById(user);
-            issueDao.add(issue);
+            try {
+                User user = userService.restoreUserByLogin(name);
+                issue.setCreatedById(user);
+                issueDao.add(issue);
+            } catch(NotFoundException nfe) {
+                nfe.printStackTrace();
+            }
         }
     }
 

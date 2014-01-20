@@ -34,12 +34,12 @@ public interface UserService {
     public User restoreUserById(long id) throws NotFoundException;
 
     /**
-     * Returns a list of the users with the given login
-     * NOTE: since login is unique this should only return a list of size 1. We could change this to restore?
+     * Returns the user with the given login. Throws a not found exception if no user is found
      * @param login
-     * @return
+     * @return 1 user with this login, or throws a not found exception. If multiple users exist,
+     * the first found is returned
      */
-    public List<User> findUserByLogin(String login);
+    public User restoreUserByLogin(String login) throws NotFoundException;
 
     /**
      * Return all users in the database

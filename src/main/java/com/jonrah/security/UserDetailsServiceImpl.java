@@ -3,6 +3,7 @@ package com.jonrah.security;
 import com.jonrah.user.User;
 import com.jonrah.user.dao.UserDao;
 import com.jonrah.user.service.UserService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -43,25 +44,26 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public UserDetails loadUserByUsername(String login)
             throws UsernameNotFoundException {
         // Find the user
-        List<User> userList = userService.findUserByLogin(login);
-        // If the list is empty, throw an exception
-        if(userList.size() == 0) {
-            throw new UsernameNotFoundException("User was not found");
-        } else {
-            user = userService.findUserByLogin(login).get(0);
+        User user = null;
+        try {
+            user = userService.restoreUserByLogin(login);
+        } catch(NotFoundException nfe) {
+            nfe.printStackTrace();
         }
-
-        // We have our user, so lets get his role and send him on to be authenticated
-        Collection<? extends GrantedAuthority> blah = getRole(user);
-        return new org.springframework.security.core.userdetails.User(
-                user.getUserName(),
-                user.getPassword(),
-                true,
-                true,
-                true,
-                true,
-                blah);
-    };
+        if(user != null) {
+            // We have our user, so lets get his role and send him on to be authenticated
+            Collection<? extends GrantedAuthority> blah = getRole(user);
+            return new org.springframework.security.core.userdetails.User(
+                    user.getUserName(),
+                    user.getPassword(),
+                    true,
+                    true,
+                    true,
+                    true,
+                    blah);
+        }
+        return null;
+    }
 
     /**
      * This returns the role assigned to the user given. Right now each user can only have one role,

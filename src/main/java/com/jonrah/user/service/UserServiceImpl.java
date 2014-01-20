@@ -6,10 +6,8 @@ import com.jonrah.user.dao.UserDao;
 import javassist.NotFoundException;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -50,7 +48,7 @@ public class UserServiceImpl implements UserService {
         Criteria crit = userDao.createCrit(new User());
         crit.add(Restrictions.eq("id", id));
         List<User> userList = userDao.findCritList(crit);
-        if(userList.size() == 1 && userList.get(0) != null) {
+        if(userList.size() > 0 && userList.get(0) != null) {
             return userList.get(0);
         } else {
             throw new NotFoundException("A user with this id does not exist");
@@ -58,10 +56,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserByLogin(String login) {
+    public User restoreUserByLogin(String login) throws NotFoundException {
         Criteria crit = userDao.createCrit(new User());
         crit.add(Restrictions.like("userName", login));
-        return userDao.findCritList(crit);
+        List<User> userList = userDao.findCritList(crit);
+        if(userList.size() > 0 && userList.get(0) != null) {
+            return userList.get(0);
+        } else {
+            throw new NotFoundException("A user with this login does not exist");
+        }
     }
 
     @Override

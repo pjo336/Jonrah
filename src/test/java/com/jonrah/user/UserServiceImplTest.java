@@ -44,7 +44,8 @@ public class UserServiceImplTest {
         User user = createUser();
 
         // If the user already exists lets not try to add them again
-        if( impl.findUserByLogin(user.getUserName()).size() == 0 ) {
+        User userExists = impl.restoreUserByLogin(user.getUserName());
+        if( userExists == null ) {
             // Add the new user
             impl.addUser(user);
             // Check the amount of Users now includes our added User

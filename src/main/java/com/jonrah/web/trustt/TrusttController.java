@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.jonrah.trustt.comment.IssueComment;
 import com.jonrah.trustt.comment.service.IssueCommentService;
 import com.jonrah.trustt.issue.Issue;
+import com.jonrah.trustt.issue.IssuePriority;
+import com.jonrah.trustt.issue.IssueStatus;
 import com.jonrah.trustt.issue.service.IssueService;
 import com.jonrah.trustt.type.IssueType;
 import com.jonrah.trustt.type.service.IssueTypeService;
@@ -20,11 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Peter Johnston on 12/26/13
@@ -114,18 +116,26 @@ public class TrusttController {
      * Submit a comment to a single issue
      */
     @RequestMapping(value = "/trustt/issue/{issueId}", method = RequestMethod.POST)
-    public String submitCommentSingleIssue(@PathVariable long issueId, @ModelAttribute IssueComment comment, ModelMap model) throws NotFoundException {
+    public String submitCommentSingleIssue(@PathVariable long issueId, @ModelAttribute IssueComment comment, ModelMap model) {
         // Get the user making the comment
-        User userCommenting = userService.findUserByLogin(SecurityUtils.getCurrentUserName()).get(0);
+        User userCommenting = null;
+        Issue connectedIssue = null;
+        try {
+            userCommenting = userService.restoreUserByLogin(SecurityUtils.getCurrentUserName());
+            connectedIssue = issueService.restoreIssueById(issueId);
+        } catch(NotFoundException nfe) {
+            nfe.printStackTrace();
+        }
+        if(userCommenting != null && connectedIssue != null) {
+            // Create and populate the comment
+            IssueComment issueComment = new IssueComment();
+            issueComment.setCommenter(userCommenting);
+            issueComment.setBugId(connectedIssue);
+            issueComment.setComment(comment.getComment());
 
-        // Create and populate the comment
-        IssueComment issueComment = new IssueComment();
-        issueComment.setCommenter(userCommenting);
-        issueComment.setBugId(issueService.restoreIssueById(issueId));
-        issueComment.setComment(comment.getComment());
-
-        // Add the comment to the database
-        issueCommentService.addComment(issueComment);
+            // Add the comment to the database
+            issueCommentService.addComment(issueComment);
+        }
 
         return "redirect:/trustt/issue/" + issueId;
     }
@@ -135,6 +145,25 @@ public class TrusttController {
      */
     @RequestMapping(value = "/trustt/issues", method = RequestMethod.GET)
     public String serveAllIssues(ModelMap model) throws NotFoundException {
+
+        // Add all the Issue Priorities available to the model
+        List<IssuePriority> priorities = new ArrayList<IssuePriority>();
+        for(IssuePriority priority: IssuePriority.values()) {
+            priorities.add(priority);
+        }
+        model.put("priorities", priorities);
+
+        // Add all the Issue Statuses available to the model
+        List<IssueStatus> statuses = new ArrayList<IssueStatus>();
+        for(IssueStatus status: IssueStatus.values()) {
+            statuses.add(status);
+        }
+        model.put("statuses", statuses);
+
+        // Add all the Issue Types available to the model
+        List<IssueType> types = issueTypeService.findAllIssueTypes();
+        model.put("types", types);
+
         boolean descending = false;
 
         List<Issue> openIssues = issueService.findAllOpenIssues();
@@ -151,12 +180,25 @@ public class TrusttController {
         return "trustt-issue-list";
     }
 
-    // TODO fix this to say the user instead of SWING
+    /**
+     * Ajax post call to update the assigned user of an issue
+     * @param model The model
+     * @param request The request, used to receive data from the client
+     * @param result The result to the ajax call
+     */
+    // TODO Probably doesnt need both a model and a result
     @RequestMapping(value = "/trustt/updateAssignedUser", method = RequestMethod.POST)
-    public void assignUser(ModelMap model, HttpServletResponseWrapper result) {
+    public void assignUser(ModelMap model, HttpServletRequest request, HttpServletResponseWrapper result) {
         System.out.println("Assigned user button clicked");
+        String userLogin = request.getParameter("userInput");
+        User user = null;
+        try {
+            user = userService.restoreUserByLogin(userLogin);
+        } catch(NotFoundException nfe) {
+            nfe.printStackTrace();
+        }
         model.put("isValid", true);
-        model.put("username", UUID.randomUUID().toString());
+        model.put("username", user.getUserName());
         try {
             write(result, model);
         } catch(IOException ioe) {
@@ -164,15 +206,36 @@ public class TrusttController {
         }
     }
 
+    /**
+     * Retrieves all user names to be added to autocomplete methods for assigning users
+     * @param model The model object
+     * @param result The result to the ajax call
+     */
+    @RequestMapping(value = "trustt/retrieveAllUserNames", method = RequestMethod.GET)
+    public void fetchAllUserNamesForAutocomplete(ModelMap model, HttpServletResponseWrapper result) {
+        List<User> users = userService.findAllUsers();
+        List<String> usernames = new ArrayList<String>();
+        for(int i = 0; i < users.size(); i++) {
+            usernames.add(users.get(i).getUserName());
+        }
+        model.put("isValid", true);
+        model.put("usernames", usernames);
+        try {
+            write(result, model);
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    /**
+     * Private method to convert a result to the client into JSON format
+     * @param result The result to the ajax call to convert to JSON
+     * @param model Where to put the result
+     * @throws IOException
+     */
     private void write(HttpServletResponseWrapper result, ModelMap model) throws IOException{
         result.setContentType("application/json");
         result.setCharacterEncoding("UTF-8");
         result.getWriter().write(new Gson().toJson(model));
-    }
-
-    @RequestMapping(value = "/trustt/searchit", method = RequestMethod.GET)
-    public String serveAutoCompleteUsers(ModelMap model) throws NotFoundException {
-        System.out.println("Searching...");
-        return "";
     }
 }

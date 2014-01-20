@@ -46,11 +46,17 @@
                                 <%--issue priority--%>
                                 <c:choose>
                                     <c:when test="${empty issue.priority}">
-                                        <td class="td-actions">
-                                            <a href="javascript:;" class="btn btn-small btn-primary">
-                                                <i class="btn-icon-only icon-ok"></i>
+                                        <td id="issuePriority-${issue.id}" class="td-actions">
+                                            <button id="${issue.id}"
+                                                    class="assignUsersButtonMain btn btn-small btn-primary">
                                                 Set Priority
-                                            </a>
+                                            </button>
+                                                <%--Hidden drop down for priority--%>
+                                            <select class="inputIssuePriority" name='priority'>
+                                                <c:forEach items="${priorities}" var="priority">
+                                                    <option value="${priority.issuePriorityName}">${priority.issuePriorityName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </td>
                                     </c:when>
                                     <c:when test="${!empty issue.priority}">
@@ -61,35 +67,88 @@
                                 </c:choose>
                                 <%--end issue priority--%>
 
-                                <td><c:out value="${issue.status}"/></td>
+                                <%--Issue status--%>
+                                <c:choose>
+                                    <c:when test="${empty issue.status}">
+                                        <td id="issueStatus-${issue.id}" class="td-actions">
+                                            <button id="${issue.id}"
+                                                    class="setStatusButtonMain btn btn-small btn-primary">
+                                                Set Status
+                                            </button>
+                                                <%--Hidden drop down for priority--%>
+                                            <select class="inputIssueStatus name='status'>
+                                                <c:forEach items="${statuses}" var="status">
+                                                    <option value="${status.issueStatusName}">
+                                                            ${status.issueStatusName}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${!empty issue.status}">
+                                        <td>
+                                            <c:out value="${issue.status.issueStatusName}"/>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                                <%--End issue status--%>
 
                                 <%--issue type--%>
                                 <c:choose>
                                     <c:when test="${empty issue.type}">
-                                        <td class="td-actions">
-                                            <a href="javascript:;" class="btn btn-small btn-primary">
-                                                <i class="btn-icon-only icon-ok"></i>
+                                        <td id="issueType-${issue.id}" class="td-actions">
+                                            <button id="${issue.id}"
+                                                    class="setIssueTypeButtonMain btn btn-small btn-primary">
                                                 Set Type
-                                            </a>
+                                            </button>
+                                                <%--Hidden drop down for priority--%>
+                                            <select class="inputIssuePriority" name='type'>
+                                                <c:forEach items="${types}" var="type">
+                                                    <option value="${type.name}">
+                                                            ${type.name}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
                                         </td>
                                     </c:when>
                                     <c:when test="${!empty issue.type}">
                                         <td>
-                                            <c:out value="${issue.type}"/>
+                                            <c:out value="${issue.type.name}"/>
                                         </td>
                                     </c:when>
                                 </c:choose>
                                 <%--end issue type--%>
+                                <style>
+                                    .ui-state-active,
+                                    .ui-widget-content .ui-state-active,
+                                    .ui-widget-header .ui-state-active,
+                                    .ui-autocomplete, .ui-autocomplete:hover,
+                                    .ui-menu-item, .ui-menu-item:hover,
+                                    .ui-menu-item a, .ui-menu-item a:hover,
+                                    .ui-widget-content .ui-state-focus,
+                                    .ui-widget-header .ui-state-focus,
+                                    .ui-widget-content .ui-state-hover,
+                                    .ui-widget-header .ui-state-hover,
+                                    .ui-menu .ui-menu-item a.ui-state-focus,
+                                    .ui-menu .ui-menu-item a.ui-state-active,
+                                    .ui-menu .ui-menu-item a
+                                    { background: #ffffff none no-repeat;
+                                        padding:0;
+                                        margin:0;
+                                        display:block;
+                                        border:0;border-collapse:collapse;
+                                    }
+                                    .ui-helper-hidden-accessible {
+                                        display:none;
+                                    }
+                                </style>
                                 <%--issue assigned to--%>
                                 <c:choose>
                                     <c:when test="${empty issue.assignedToId}">
                                         <td id="assignedUser-${issue.id}" class="td-actions">
-                                            <form:form id="assignUsersForm-${issue.id}" method="post">
                                                 <button id="${issue.id}" class="assignUsersButtonMain btn btn-small btn-primary">Assign</button>
                                                 <%--Hidden text field and submit button--%>
                                                 <input id="inputAssignedUserName-${issue.id}" class="inputAssignedUserName" type="text" width="75px"/>
-                                                <button id="inputAssignedUserNameButton-${issue.id}" class="inputAssignedUserName glyphicon glyphicon-ok-sign"/>
-                                            </form:form>
                                         </td>
                                     </c:when>
                                     <c:when test="${!empty issue.assignedToId}">
@@ -105,7 +164,7 @@
                                 <td class="td-actions">
                                     <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-info">
                                         <i class="btn-icon-only icon-ok"></i>
-                                        Open Issue
+                                        View Issue
                                     </a>
                                 </td>
                             </tr>
@@ -155,10 +214,7 @@
                                     <c:choose>
                                         <c:when test="${empty issue.priority}">
                                             <td class="td-actions">
-                                                <a href="javascript:;" class="btn btn-small btn-primary">
-                                                    <i class="btn-icon-only icon-ok"></i>
-                                                    Set Priority
-                                                </a>
+
                                             </td>
                                         </c:when>
                                         <c:when test="${!empty issue.priority}">
@@ -175,10 +231,7 @@
                                     <c:choose>
                                         <c:when test="${empty issue.type}">
                                             <td class="td-actions">
-                                                <a href="javascript:;" class="btn btn-small btn-primary">
-                                                    <i class="btn-icon-only icon-ok"></i>
-                                                    Set Type
-                                                </a>
+
                                             </td>
                                         </c:when>
                                         <c:when test="${!empty issue.type}">
@@ -193,10 +246,7 @@
                                     <c:choose>
                                         <c:when test="${empty issue.assignedToId}">
                                             <td class="td-actions">
-                                                <a href="javascript:;" class="btn btn-small btn-primary">
-                                                    <i class="btn-icon-only icon-ok"></i>
-                                                    Assign
-                                                </a>
+
                                             </td>
                                         </c:when>
                                         <c:when test="${!empty issue.assignedToId}">
@@ -210,9 +260,9 @@
                                         <%--end issue assigned to--%>
 
                                     <td class="td-actions">
-                                        <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-primary">
+                                        <a href="/trustt/issue/${issue.id}" class="btn btn-small btn-info">
                                             <i class="btn-icon-only icon-ok"></i>
-                                            Open Issue
+                                            View Issue
                                         </a>
                                     </td>
                                 </tr>
@@ -225,5 +275,8 @@
             </div>
         </div>
         </div>
+    </div>
+    <div id="saveIssueChanges">
+        <button id="saveIssue" class="assignUsersButtonMain btn btn-large btn-primary">Save Updates</button>
     </div>
 </div>
