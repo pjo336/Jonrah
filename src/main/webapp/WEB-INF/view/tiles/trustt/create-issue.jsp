@@ -6,7 +6,7 @@
 
     <c:url var="createIssue" value="/trustt/create-issue"/>
     <form:form id="issueForm" class="form-signin" method="post" commandName="issue"
-               action="${createIssue}">
+               action="${createIssue}" modelAttribute="issueForm">
 
         <table width="600px" height="350px">
             <tr>

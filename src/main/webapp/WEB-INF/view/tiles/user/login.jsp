@@ -21,6 +21,13 @@
                 <td><input type='password' name='j_password' class="form-control" placeholder="Password"/>
                 </td>
             </tr>
+
+            <tr class="checkbox checkbox-vertical">
+                <td>
+                    <input type="checkbox" name="_spring_security_remember_me"><span style="color:#000;"> Remember me</span>
+                </td>
+            </tr>
+
             <tr>
                 <td colspan='2'><input name="submit" type="submit"
                                        value="submit" class="btn btn-lg btn-primary btn-block"/>

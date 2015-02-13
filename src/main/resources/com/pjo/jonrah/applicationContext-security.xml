@@ -1,0 +1,29 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/trustt*" access="isAuthenticated()" />
+        <!--<intercept-url pattern="/userList*" access="hasRole('ROLE_ADMIN')" />-->
+        <form-login login-page="/login" default-target-url="/trustt"
+                    authentication-failure-url="/loginfailed" />
+        <logout logout-url="/logout" logout-success-url="/login?out=1"
+                delete-cookies="JSESSIONID" invalidate-session="true" />
+        <remember-me data-source-ref="dataSource" user-service-ref="customUserDetailsService"/>
+    </http>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <beans:bean id="customUserDetailsService" class="com.pjo.jonrah.security.UserDetailsServiceImpl"/>
+
+    <authentication-manager>
+        <authentication-provider
+                user-service-ref="customUserDetailsService">
+            <password-encoder ref="encoder"/>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

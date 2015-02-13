@@ -16,7 +16,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:com/jonrah/applicationContext.xml
+            classpath:com/pjo/jonrah/applicationContext.xml
         </param-value>
     </context-param>
 

@@ -8,7 +8,7 @@
     <definition name="jonrah.common" template="/WEB-INF/view/layouts/common.jsp">
         <!-- title -->
         <put-attribute name="html-header" value="/WEB-INF/view/tiles/common/header.jsp" />
-        <put-attribute name="top-navbar" value="/WEB-INF/view/tiles/common/top-navbar.jsp" />
+        <put-attribute name="top-navbar" value="/WEB-INF/view/tiles/common/trustt/trustt-navbar.jsp" />
         <!-- header -->
         <!-- body -->
         <!-- custom-styles -->
@@ -16,12 +16,9 @@
         <!-- custom-scripts -->
     </definition>
 
+
     <!-- Views -->
     <!-- GENERAL -->
-    <definition name="index" extends="jonrah.common">
-        <put-attribute name="title" value="Jonrah" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/index/index-body.jsp" />
-    </definition>
 
     <definition name="login" extends="jonrah.common">
         <put-attribute name="title" value="Jonrah | Login" />
@@ -30,43 +27,37 @@
 
     <definition name="register" extends="jonrah.common">
         <put-attribute name="title" value="Jonrah | Register" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/user/register.jsp" />
+        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/register/register-styles.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/tiles/register/register.jsp" />
     </definition>
 
-    <definition name="user-list" extends="jonrah.common">
-        <put-attribute name="title" value="Jonrah | User List" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/user/user-details.jsp" />
-    </definition>
-
-    <!-- TRUST -->
+    <!-- TRUSTT -->
 
     <definition name="trustt-homepage" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | Welcome" />
+        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/trustt-styles.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/trustt/trustt-sidebar.jsp" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/trustt-homepage.jsp" />
     </definition>
 
     <definition name="trustt-issue-detail" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | Issue Detail" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail.jsp" />
         <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail-styles.jsp" />
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/trustt/trustt-sidebar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail.jsp" />
         <put-attribute name="custom-scripts" value="/WEB-INF/view/tiles/trustt/issue-detail/issue-detail-scripts.jsp" />
     </definition>
 
     <definition name="trustt-issue-list" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | All Issues" />
+        <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list-styles.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/trustt/trustt-sidebar.jsp" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list.jsp" />
     </definition>
 
     <definition name="trustt-create-issue" extends="jonrah.common">
         <put-attribute name="title" value="Trustt | Create an Issue" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/create-issue.jsp" />
-    </definition>
-
-    <!-- ADMIN -->
-
-    <definition name="admin-page" extends="jonrah.common">
-        <put-attribute name="title" value="Jonrah | Admin" />
-        <put-attribute name="body" value="/WEB-INF/view/tiles/admin/admin-page.jsp" />
     </definition>
 
 </tiles-definitions>

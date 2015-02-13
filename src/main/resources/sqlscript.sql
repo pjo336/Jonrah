@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `JONRAH_TRUSTT`.`JONRAH_USER` ;
 CREATE TABLE IF NOT EXISTS `JONRAH_TRUSTT`.`JONRAH_USER` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -27,6 +27,37 @@ CREATE TABLE IF NOT EXISTS `JONRAH_TRUSTT`.`JONRAH_USER` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `JONRAH_TRUSTT`.`JONRAH_USER_ROLES`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `JONRAH_TRUSTT`.`JONRAH_USER_ROLES` ;
+
+CREATE TABLE IF NOT EXISTS `JONRAH_TRUSTT`.`JONRAH_USER_ROLES` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL,
+  `authority` VARCHAR(45) NOT NULL,
+  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_user_roles` (`user_id`),
+  CONSTRAINT `FK_user_roles` FOREIGN KEY (`USER_ID`) REFERENCES `JONRAH_USER` (`id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table `JONRAH_TRUSTT`.`PERSISTENT_LOGINS`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `JONRAH_TRUSTT`.`PERSISTENT_LOGINS`;
+
+CREATE TABLE IF NOT EXISTS `JONRAH_TRUSTT`.`PERSISTENT_LOGINS` (
+  `username` VARCHAR(64) NOT NULL,
+  `series` VARCHAR(64) NOT NULL,
+  `token` VARCHAR(64) NOT NULL,
+  `last_used` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`series`)
+) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
 -- Table `JONRAH_TRUSTT`.`JONRAH_ISSUE_COMMENT`

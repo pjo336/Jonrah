@@ -13,8 +13,8 @@
     <mvc:annotation-driven />
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 
-	<context:component-scan base-package="com.jonrah.web" />
-    <context:component-scan base-package="com.jonrah.security" />
+	<context:component-scan base-package="com.pjo.jonrah.web" />
+    <context:component-scan base-package="com.pjo.jonrah.security" />
 
     <bean id="jspViewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

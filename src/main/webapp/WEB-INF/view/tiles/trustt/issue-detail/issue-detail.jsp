@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="container">
+<div class="container withsidenav">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">${issue.title}</h3>
@@ -29,11 +29,21 @@
     <%--Comments--%>
     <div class="container">
         <c:if test="${!empty comments}">
+                <table class="table table-condensed">
             <c:forEach items="${comments}" var="comment">
-                <table>
-                <tr class="issue-detail-comment" cols="50" name="comment">${comment.comment} posted by: ${comment.commenter.userName}</tr>
-                </table>
+                    <tr class="issue-detail-comment" cols="50" name="comment">
+                            <td>
+                                <p class="issue-comment">${comment.comment}</p>
+                                <br />
+                                <p>
+                                    <b>posted by: </b> ${comment.commenter.userName}
+                                    <br />
+                                    <b>date posted: </b> ${comment.dateAdded}
+                                </p>
+                            </td>
+                    </tr>
             </c:forEach>
+                </table>
         </c:if>
     </div>
 
@@ -51,7 +61,7 @@
                             <form:form modelAttribute="newComment" accept-charset="UTF-8" action="" method="post">
                                 <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your comment here" rows="5" path="comment"></textarea>
 
-                                <div class="text-right">
+                                <div class="text-right commentbuttons">
                                     <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                         <span class="glyphicon glyphicon-remove"></span>Cancel</a>
                                     <button class="btn btn-small btn-primary" type="submit">Add Comment</button>
