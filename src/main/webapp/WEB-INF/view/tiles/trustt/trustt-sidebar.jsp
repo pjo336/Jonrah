@@ -7,7 +7,7 @@
       <li><a href="/trustt/export">Export</a></li>
     </ul>
     <ul class="nav nav-sidebar">
-      <li id="issues-sidebar"><a href="trustt/issues">Issues</a></li>
+      <li id="issues-sidebar"><a href="/trustt/issues">Issues</a></li>
       <li><a href="/trustt/milestones">Milestones</a></li>
       <li><a href="/trustt/users">Users</a></li>
     </ul>
