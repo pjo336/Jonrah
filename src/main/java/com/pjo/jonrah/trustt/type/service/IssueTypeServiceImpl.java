@@ -20,12 +20,18 @@ import java.util.List;
 public class IssueTypeServiceImpl implements IssueTypeService {
 
     @Autowired
-    private EntityDao entityDao;//entityDao entityDao;
+    private EntityDao entityDao;
 
     @Override
     public void addIssueType(IssueType issueType) {
         entityDao.add(issueType);
     }
+
+    @Override
+    public void saveOrUpdateIssueType(IssueType issueType) {
+        entityDao.saveOrUpdate(issueType);
+    }
+
     @Override
     public List<IssueType> findAllIssueTypes() {
         Criteria crit = entityDao.createCrit(new IssueType());

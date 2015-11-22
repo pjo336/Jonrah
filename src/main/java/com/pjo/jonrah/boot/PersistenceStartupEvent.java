@@ -45,8 +45,7 @@ public class PersistenceStartupEvent implements ApplicationListener<ContextRefre
             userService.addUser(admin);
         }
 
-        // TODO validate this
-        // Ensure all issueTypes are added to the database
+        // Ensure all issueTypes are added to the database from the properties file
         InputStream in = getClass().getClassLoader().getResourceAsStream("issuetypes.properties");
         Properties properties = new Properties();
         try {
@@ -56,10 +55,7 @@ public class PersistenceStartupEvent implements ApplicationListener<ContextRefre
         }
         for(String s: properties.stringPropertyNames()) {
             IssueType issueType = new IssueType(Long.valueOf(s), properties.getProperty(s));
-            if(issueTypeService.findIssueByName(issueType.getName()).size() == 0) {
-                issueTypeService.addIssueType(issueType);
-                System.out.println("added issuetype " + issueType.getName());
-            }
+            issueTypeService.saveOrUpdateIssueType(issueType);
         }
     }
 }

@@ -13,6 +13,8 @@ public interface IssueTypeService {
 
     public void addIssueType(IssueType issueType);
 
+    public void saveOrUpdateIssueType(IssueType issueType);
+
     public List<IssueType> findAllIssueTypes();
 
     public List<IssueType> findIssueByName(String name);
