@@ -1,13 +1,13 @@
 package com.pjo.jonrah.trustt.issue.service;
 
 import com.pjo.jonrah.entity.dao.EntityDao;
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.trustt.issue.Issue;
 import com.pjo.jonrah.trustt.issue.IssueStatus;
 import com.pjo.jonrah.trustt.type.service.IssueTypeService;
 import com.pjo.jonrah.user.User;
 import com.pjo.jonrah.user.service.UserService;
 import com.pjo.jonrah.util.SecurityUtils;
-import javassist.NotFoundException;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;

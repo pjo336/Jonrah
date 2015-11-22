@@ -1,12 +1,12 @@
 package com.pjo.jonrah.boot;
 
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.trustt.type.IssueType;
 import com.pjo.jonrah.trustt.type.service.IssueTypeService;
 import com.pjo.jonrah.user.User;
 import com.pjo.jonrah.user.UserGender;
 import com.pjo.jonrah.user.UserType;
 import com.pjo.jonrah.user.service.UserService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

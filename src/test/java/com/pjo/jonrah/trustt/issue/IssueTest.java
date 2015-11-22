@@ -1,12 +1,12 @@
 package com.pjo.jonrah.trustt.issue;
 
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.trustt.comment.service.IssueCommentService;
 import com.pjo.jonrah.trustt.issue.service.IssueService;
 import com.pjo.jonrah.trustt.milestone.service.MilestoneService;
 import com.pjo.jonrah.trustt.type.service.IssueTypeService;
 import com.pjo.jonrah.user.User;
 import com.pjo.jonrah.user.service.UserService;
-import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

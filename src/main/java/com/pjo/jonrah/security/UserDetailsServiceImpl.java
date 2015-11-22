@@ -1,8 +1,8 @@
 package com.pjo.jonrah.security;
 
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.user.User;
 import com.pjo.jonrah.user.service.UserService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

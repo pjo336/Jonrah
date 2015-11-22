@@ -1,7 +1,7 @@
 package com.pjo.jonrah.trustt.issue.service;
 
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.trustt.issue.Issue;
-import javassist.NotFoundException;
 
 import java.util.List;
 

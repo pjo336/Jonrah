@@ -1,7 +1,7 @@
 package com.pjo.jonrah.user.service;
 
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.user.User;
-import javassist.NotFoundException;
 
 import java.util.List;
 

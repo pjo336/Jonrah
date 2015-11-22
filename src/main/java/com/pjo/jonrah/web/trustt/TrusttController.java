@@ -1,6 +1,7 @@
 package com.pjo.jonrah.web.trustt;
 
 import com.google.gson.Gson;
+import com.pjo.jonrah.exceptions.NotFoundException;
 import com.pjo.jonrah.trustt.comment.IssueComment;
 import com.pjo.jonrah.trustt.comment.service.IssueCommentService;
 import com.pjo.jonrah.trustt.issue.Issue;
@@ -13,7 +14,6 @@ import com.pjo.jonrah.user.User;
 import com.pjo.jonrah.user.service.UserService;
 import com.pjo.jonrah.util.SecurityUtils;
 import com.pjo.jonrah.web.trustt.forms.IssueForm;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
