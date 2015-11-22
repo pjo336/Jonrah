@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <title><tiles:insertAttribute name="title" defaultValue="Jonrah"/></title>
     <tiles:insertAttribute name="html-header"/>
-    <tiles:insertAttribute name="custom-styles " defaultValue=""/>
+    <tiles:insertAttribute name="custom-styles" defaultValue=""/>
 </head>
 <body>
 <tiles:insertAttribute name="top-navbar" />
