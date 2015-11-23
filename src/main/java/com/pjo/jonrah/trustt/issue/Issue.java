@@ -58,7 +58,7 @@ public class Issue implements JonrahEntity {
     private IssueType type;
 
     @Column(name = "priority")
-    private String priority;
+    private IssuePriority priority;
 
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -159,10 +159,10 @@ public class Issue implements JonrahEntity {
     }
 
     public IssuePriority getPriority() {
-        return IssuePriority.getIssuePriorities(priority);
+        return this.priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(IssuePriority priority) {
         this.priority = priority;
     }
 

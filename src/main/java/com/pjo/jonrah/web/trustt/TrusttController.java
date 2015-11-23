@@ -53,20 +53,6 @@ public class TrusttController {
     @RequestMapping("/trustt")
     public String getTrustHomePage(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//
-//        // Find all the issues
-//        List<Issue> issues = issueService.findAllIssues();
-//
-//        // List all the possible IssueTypes
-//        List<IssueType> types = issueTypeService.findAllIssueTypes();
-//        List<String> issueTypeNames = new ArrayList<String>();
-//        for(IssueType type: types) {
-//            issueTypeNames.add(type.getName());
-//        }
-//
-//        // Put the issues and the possible types on the model
-//        model.put("issues", issues);
-//        model.put("types", issueTypeNames);
         return "trustt-homepage";
     }
 
@@ -82,9 +68,10 @@ public class TrusttController {
         for(IssueType type: types) {
             issueTypeNames.add(type.getName());
         }
-
         // Add the type names on the model
         model.put("types", issueTypeNames);
+
+        model.put("priorities", IssuePriority.values());
 
         return "trustt-create-issue";
     }
@@ -98,6 +85,7 @@ public class TrusttController {
         issue.setTitle(issueForm.getTitle());
         issue.setDescription(issueForm.getDescription());
         issue.setType(issueTypeService.findIssueByName(issueForm.getType()).get(0));
+        issue.setPriority(issueForm.getPriority());
         issueService.addIssue(issue);
         return "redirect:/trustt/issue/" + issue.getId();
     }
@@ -189,22 +177,29 @@ public class TrusttController {
      * @param request The request, used to receive data from the client
      * @param result The result to the ajax call
      */
-    // TODO Probably doesnt need both a model and a result
     @RequestMapping(value = "/trustt/updateAssignedUser", method = RequestMethod.POST)
-    public void assignUser(ModelMap model, HttpServletRequest request, HttpServletResponseWrapper result) {
-        System.out.println("Assigned user button clicked");
+    public void assignUser(ModelMap model, HttpServletRequest request, HttpServletResponseWrapper result) throws NotFoundException {
         String userLogin = request.getParameter("userInput");
-        User user = null;
-        try {
-            user = userService.restoreUserByLogin(userLogin);
-        } catch(NotFoundException nfe) {
-            nfe.printStackTrace();
+        if(userLogin == null || userLogin.trim().equals("")) {
+            return;
         }
-        model.put("isValid", true);
-        model.put("username", user.getUserName());
+        long issueId = Long.valueOf(request.getParameter("issueId"));
         try {
+            // Ensure the user exists
+            model.put("isValid", true);
+            User user = userService.restoreUserByLogin(userLogin);
+            model.put("username", user.getUserName());
+            // Ensure the issue exists
+            Issue issue = issueService.restoreIssueById(issueId);
+            // Update the issue to be assigned to this user
+            issue.setAssignedToId(user);
+            issueService.updateIssue(issue);
             write(result, model);
+        } catch(NotFoundException nfe) {
+            // User or issue doesnt exist, tell the user this action cant be done
+            throw nfe;
         } catch(IOException ioe) {
+            // TODO throw real exceptions if errors arise
             ioe.printStackTrace();
         }
     }

@@ -25,6 +25,11 @@
             </tr>
 
             <tr>
+                <td><form:label path="priority">Priority</form:label></td>
+                <td><form:select path="priority" items="${priorities}" /></td>
+            </tr>
+
+            <tr>
                 <td><form:button type="submit" value="Create">Create</form:button></td>
             </tr>
         </table>

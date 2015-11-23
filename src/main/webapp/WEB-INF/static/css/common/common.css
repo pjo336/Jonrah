@@ -6,6 +6,12 @@ div.container.withsidenav {
     padding-left: 215px;
 }
 
+.label-pill {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
+}
+
 
 /*
  * Issue Detail page

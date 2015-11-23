@@ -1,10 +1,13 @@
 package com.pjo.jonrah.web.trustt.forms;
 
+import com.pjo.jonrah.trustt.issue.IssuePriority;
+
 public class IssueForm {
 
     private String title;
     private String description;
     private String type;
+    private IssuePriority priority;
 
     public String getTitle() {
         return title;
@@ -28,5 +31,13 @@ public class IssueForm {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public IssuePriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(IssuePriority priority) {
+        this.priority = priority;
     }
 }

@@ -13,38 +13,31 @@ $(document).ready(function(){
     $('.inputIssueStatus').hide();
     $('.inputIssuePriority').hide();
     $('.inputAssignedUserName').hide();
+    $('.inputAssignAccept').hide();
 
     // Hide the save button until it is needed
     $('#saveIssueChanges').hide();
 
     // Load all user names for auto complete
     fetchUserNames(function(users) {
-
-        $('.assignUsersButtonMain').click(function() {
+        var assignButton = $('.assignUsersButtonMain');
+        assignButton.click(function() {
 
             var currentId = this.getAttribute("id");
             var inputNameField = $('#inputAssignedUserName-' + currentId);
-            var inputNameButton = $('#inputAssignedUserNameButton-' + currentId);
-            var assignButton = $('#' + currentId);
             var updatedDisplayedAssignedUser = $('#assignedUser-' + currentId);
 
             // When assign User is clicked, show the text box to enter a user
-            inputNameField.show(200, function() {
-                inputNameField.focus();
-            });
-            inputNameButton.show(200);
-            assignButton.hide();
+            showAssignUserInputField(currentId);
 
             // When the user clicks outside of the text box, hide the text box again
             inputNameField.blur(function() {
                 assignButton.show(300);
                 inputNameField.hide();
-                inputNameButton.hide();
             });
 
             inputNameField.keydown(function(e) {
                 var charCode = e.which;
-                console.log(charCode);
 
                 var userNamesDict = [];
                 for(var i = 0; i < users.length; i++) {
@@ -54,11 +47,9 @@ $(document).ready(function(){
                     source: userNamesDict,
                     noResults: ""
                 });
+                // Handle enter button to submit
                 if(charCode == 13) {
-                    // Pass along the inputted user information to the server
-                    var data = {userInput : inputNameField.val()};
-                    ajaxCall(data, updatedDisplayedAssignedUser);
-                    $('#saveIssueChanges').show(200);
+                    submitUpdateAssignedUser(currentId);
                 }
             });
             return false;
@@ -66,13 +57,30 @@ $(document).ready(function(){
     });
 }); // End of ready function
 
-// TODO could make this more universal if needed
+function showAssignUserInputField(currentId) {
+    var inputNameField = $('#inputAssignedUserName-' + currentId);
+    var assignButton = $('.assignUsersButtonMain');
+    var assignedUserLink = $('#existingAssignedUser-' + currentId);
+    inputNameField.show(200, function() {
+        assignButton.hide();
+        assignedUserLink.hide();
+        inputNameField.focus();
+    });
+}
+function submitUpdateAssignedUser(currentId) {
+    var inputNameField = $('#inputAssignedUserName-' + currentId);
+    var updatedDisplayedAssignedUser = $('#assignedUser-' + currentId);
+    // Pass along the inputted user information to the server
+    console.log(inputNameField.val());
+    var data = {userInput : inputNameField.val(), issueId : currentId};
+    updateAssignedUser(data, updatedDisplayedAssignedUser);
+}
 /**
  * An Ajax post call used to alter html elements on the page to a username fetched from the server
  * @param dataToServer Contains any information you want to send to the server side
  * @param dataToChange The tag you want to change the html of to a username
  */
-function ajaxCall(dataToServer, dataToChange) {
+function updateAssignedUser(dataToServer, dataToChange) {
     $.ajax({
         url: 'updateAssignedUser',
         type: 'POST',
@@ -88,7 +96,6 @@ function ajaxCall(dataToServer, dataToChange) {
     });
 };
 
-// TODO could make this more universal if needed
 /**
  * This fetches all current usernames from the server for use in Assigning autocomplete using a GET method
  */

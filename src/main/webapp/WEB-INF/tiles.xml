@@ -53,6 +53,7 @@
         <put-attribute name="custom-styles" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list-styles.jsp"/>
         <put-attribute name="sidebar" value="/WEB-INF/view/tiles/trustt/trustt-sidebar.jsp" />
         <put-attribute name="body" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list.jsp" />
+        <put-attribute name="custom-scripts" value="/WEB-INF/view/tiles/trustt/issue-list/issue-list-scripts.jsp" />
     </definition>
 
     <definition name="trustt-create-issue" extends="jonrah.common">

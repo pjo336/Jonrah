@@ -69,7 +69,7 @@ public class IssueTest {
         issue.setTitle("Bug number 1");
         issue.setStatus("0");
         issue.setDescription("This is a bug");
-        issue.setPriority("1");
+        issue.setPriority(IssuePriority.BLOCKER);
         return issue;
     }
 }

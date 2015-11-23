@@ -7,17 +7,17 @@ package com.pjo.jonrah.trustt.issue;
 
 public enum IssuePriority {
 
-    BLOCKER("0", "Blocker"),
-    CRITICAL("1", "Critical"),
-    HIGH("2", "High"),
-    MEDIUM("3", "Medium"),
-    LOW("4", "Low"),
-    FIX_IF_TIME("5", "Fix if time");
+    BLOCKER(0L, "Blocker"),
+    CRITICAL(1L, "Critical"),
+    HIGH(2L, "High"),
+    MEDIUM(3L, "Medium"),
+    LOW(4L, "Low"),
+    FIX_IF_TIME(5L, "Fix if time");
 
-    public String issuePriorityValue;
+    public long issuePriorityValue;
     public String issuePriorityName;
 
-    private IssuePriority(String value, String name) {
+    private IssuePriority(long value, String name) {
         this.issuePriorityValue = value;
         this.issuePriorityName = name;
     }
